@@ -27682,7 +27682,7 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
         }        
     }
 
-// Cнифер
+
 // Сниффер !!!
     if (ID_to_sniff != 0) {
 //        if (ID_to_sniff == ID_tmp) {
