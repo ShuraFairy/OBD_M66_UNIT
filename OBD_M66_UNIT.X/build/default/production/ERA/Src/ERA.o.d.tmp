@@ -1,0 +1,3 @@
+build/default/production/ERA/Src/ERA.o:  \
+ERA/Src/ERA.c  \
+ERA/Src/../../ERA/Inc/ERA.h 

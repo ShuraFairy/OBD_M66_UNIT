@@ -12122,7 +12122,7 @@ Nop();Nop();Nop();
         } else load_answer ( source_of_command, "error:at$saen", 0, 0 );
     } 
     
-    temp = strstr( at_ptr, CSNF );
+/*    temp = strstr( at_ptr, CSNF );
 	if (temp) {
         volatile unsigned long id;
         volatile unsigned char u;
@@ -12150,7 +12150,7 @@ Nop();Nop();Nop();
             ecan1WriteRxAcptFilter( (int)0x0A, (long)id, 1, 15, 0);
             load_answer ( source_of_command, "ok:at$csnf", 0, 0 );
         } else load_answer ( source_of_command, "error:at$csnf", 0, 0 );
-        } else load_answer ( source_of_command, "error:at$csnf", 0, 0 );    
+        } else load_answer ( source_of_command, "error:at$csnf", 0, 0 );   */ 
     
 }
 void apply_acc_sampling_frequency ( temp ) {
@@ -27658,7 +27658,7 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
     if (  CANTESTPRMSbits.can_number != 0 ) { 
         if (CANTESTPRMSbits.can_number == 1 && CANTESTPRMSbits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
-            if (( CAN1_DATA_buf[CANTESTPRMSbits.byte] & CANTESTPRMSbits.bit_mask ) == CANTESTPRMSbits.value1) {
+            if (( CAN1_DATA_buf[CANTESTPRMSbits.byte] & CANTESTPRMSbits.bit_mask )){// == CANTESTPRMSbits.value1) {
                 Nop();
                 can_button = 1; 
                 Nop();
@@ -27671,11 +27671,13 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
         }
         if (CANTESTPRMSbits.can_number == 2 && CANTESTPRMSbits.id == ID2_tmp) {
             generate_canbus_sleep_message ( 2 );
-            if (( CAN2_DATA_buf[CANTESTPRMSbits.byte] & CANTESTPRMSbits.bit_mask ) == CANTESTPRMSbits.value1) { 
+            if (( CAN2_DATA_buf[CANTESTPRMSbits.byte] & CANTESTPRMSbits.bit_mask )){// == CANTESTPRMSbits.value1) { 
+                Nop();
                 can_button = 1; 
                 Nop();
             }
             else { 
+                Nop();
                 can_button = 0; 
                 Nop();
             }
@@ -38024,10 +38026,10 @@ static unsigned char button = 0, fisical_button_counter = 0, tmp, counter = 0;
 //    }
     else {
         counter = 0;
-        ecan2WriteTxMsgBufId ( 3, (long) 0xBB, (unsigned int) 0, (unsigned int) 0 );
-        ecan2WriteTxMsgBufData( 3, (unsigned int) 8, (unsigned int)button, 0, 0, 0 );
-//        ecan2WriteTxMsgBufId ( 3, (long) 0x7DA, (unsigned int) 0, (unsigned int) 0 );
-//        ecan2WriteTxMsgBufData( 3, (unsigned int) 8, 0x1810, 0x0161, 0x7055, 0xFFD7 );
+//        ecan2WriteTxMsgBufId ( 3, (long) 0xBB, (unsigned int) 0, (unsigned int) 0 );
+//        ecan2WriteTxMsgBufData( 3, (unsigned int) 8, (unsigned int)button, 0, 0, 0 );
+        ecan2WriteTxMsgBufId ( 3, (long) 0x7CA, (unsigned int) 0, (unsigned int) 0 );
+        ecan2WriteTxMsgBufData( 3, (unsigned int) 8, 0x0322, 0x0003, 0xAAAA, 0xAAAA );
         settxtransmit2( 3 );        
     }    
 }
@@ -38899,9 +38901,9 @@ unsigned int i;
     CANTESTPRMSbits.can_number  = 1;
     CANTESTPRMSbits.filt_number = 5;
     CANTESTPRMSbits.bit_mask    = 0xFF;
-    CANTESTPRMSbits.value1      = 0x77;
-    CANTESTPRMSbits.value2      = 0;
-    CANTESTPRMSbits.id          = 0xBB;
+    CANTESTPRMSbits.value1      = 0x0;
+    CANTESTPRMSbits.value2      = 0x0;
+    CANTESTPRMSbits.id          = 0x7DA;
 //\//        
     
     Fp1 = 20; Fp2 = 20;
@@ -39143,7 +39145,7 @@ navi_wait_timer = 35;
 /**/T8CONbits.TON = 1;
 //sleep_counter = 17000;
 //unsigned char tmp_flag = 0;
-while (1) {
+while (1)  {
 
 //        OUTPUTbits.out4_p12 = 1;
 //        wright_MCP23S08 ( 0x0A, OUTPUTbits.OUTPUT );     
