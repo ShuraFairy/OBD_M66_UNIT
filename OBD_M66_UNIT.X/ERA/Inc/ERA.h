@@ -85,7 +85,7 @@
 //********************************* Ñonstants **********************************
  const uint16_t request_inputStateRecord [] = {INPUT_STATES_RECORD};
 //********************************* Variables **********************************
- union __attribute__ ((far))  {
+union __attribute__ ((far))  {
     unsigned long long Data;
     struct 
     {
@@ -104,7 +104,7 @@
     } Bits;
 } DIAGNOSTICS;  
 
-// Description for inputStatesRecord
+// ID - 0x0001, Description for inputStatesRecord
 union __attribute__ ((far))  {
     uint16_t Data; 
     struct
@@ -119,7 +119,7 @@ union __attribute__ ((far))  {
     } Bits;
 } inputStatesRecor;
 
-// Description for outputStatesRecord
+// ID - 0x0002, Description for outputStatesRecord
 union __attribute__ ((far))  {
     uint32_t Data;  
     struct
@@ -143,19 +143,19 @@ union __attribute__ ((far))  {
     } Bits;
 } outputStatesRecord;
 
-// Description for boardVoltage
+// ID - 0x0003, Description for boardVoltage
 // Invalid Value = 0xFF, Min = 0, Max = 24.021, Formula - N = 0.0942 * E, Unit - V
-uint8_t  boardVoltage = 0;
+uint8_t  boardVoltage;
 
-// Description for reserveBatteryCharge
+// ID - 0x0004, Description for reserveBatteryCharge
 // Invalid Value = 0xFF, Min = 0, Max = 100, Formula - N = 0.3922 * E, Unit - %
-uint8_t  reserveBatteryCharge = 0;
+uint8_t  reserveBatteryCharge;
 
-// Description for reserveBatteryTemperature
+// ID - 0x0005, Description for reserveBatteryTemperature
 // Invalid Value = 0xFF, Min = -40, Max = 87, Formula - N = 0.3922 * E, Unit - °C
-uint8_t reserveBatteryTemperature = 0;
+uint8_t reserveBatteryTemperature;
 
-// Description for SystemState
+// ID - 0x0006, Description for SystemState
 union __attribute__ ((far))  {
     uint32_t Data;  
     struct
@@ -218,7 +218,7 @@ union __attribute__ ((far))  {
     } Bits;
 } SystemState;
 
-// Description for vehicleCoordinates
+// ID - 0x0007, Description for vehicleCoordinates
 __attribute__ ((far)) struct vehicleCoordinates
 {
     uint32_t vehicleLattitude;  // Invalid value - 0xFFFFFFFF, Min = -90, Max = 90
@@ -227,10 +227,13 @@ __attribute__ ((far)) struct vehicleCoordinates
                                 // Formula - N = (E / 3600000) - 180;
 };
 
-uint8_t vehicleCoordinatesReliability   = 0;    // 0 - false, 1 - true, 2 - undefined, 3 - not used
-uint8_t MDS_FormatVersion               = 0;    // uint8 (0 - 255)
+// ID - 0x0008, vehicleCoordinatesReliability - Current value of vehicle coordinates reliability
+uint8_t vehicleCoordinatesReliability;      // 0 - false, 1 - true, 2 - undefined, 3 - not used
 
-// Description for vehicleFuelType
+// ID - 0x0009, MDS_FormatVersion - Current format version of Minimum Data Set
+uint8_t MDS_FormatVersion;                  // uint8 (0 - 255)
+
+// ID - 0x000A, Description for vehicleFuelType
 union __attribute__ ((far))  {
     uint8_t Data; 
     struct
@@ -245,70 +248,70 @@ union __attribute__ ((far))  {
     } Bits;
 } vehicleFuelType;
 
-// timeStamp - Current value of seconds from 0:00 am 01/01/1970, Invalid valuex - 0xFFFFFFFF
-uint32_t timeStapm = 0;     
+// ID - 0x000B, timeStamp - Current value of seconds from 0:00 am 01/01/1970, Invalid valuex - 0xFFFFFFFF
+uint32_t timeStapm;     
 
-// passengersNumber - Current value of passenger number
+// ID - 0x000C, passengersNumber - Current value of passenger number
 // uint8, min = 0, max = 254, 0xFF - undefined
-uint8_t passengersNumber = 0;
+uint8_t passengersNumber;
 
-// TCM_working_mode - The working of TCM
+// ID - 0x000D, TCM_working_mode - The working of TCM
 // 0x5A - working mode, 0xA5 - factory mode
-uint8_t TCM_working_mode = 0;
+uint8_t TCM_working_mode;
 
-// TCM_activation_source - The way of the TCM activation
+// ID - 0x000E, TCM_activation_source - The way of the TCM activation
 // 0 - non-activated, 1 - auto-activated, 2 - manually activated, 3 - undefined
-uint8_t TCM_activation_source = 0;
+uint8_t TCM_activation_source;
 
-// TCM_time_calculation - The source of the TIMESTAMP
+// ID - 0x000F, TCM_time_calculation - The source of the TIMESTAMP
 // uint8(0 bit), 0 - GPS/GLONASS, 1 - internal RTC
-uint8_t TCM_time_calculation = 0;
+uint8_t TCM_time_calculation;
 
-// ECALLManualCanCancel - Current state the ecall_manual_can_cancel
+// ID - 0x0010, ECALLManualCanCancel - Current state the ecall_manual_can_cancel
 // 0xC7 - active, 0x7C - inactive
-uint8_t ECALLManualCanCancel = 0;
+uint8_t ECALLManualCanCancel;
 
-// GLONASS_and_GLONASS_GPS_groups - The switching between the sattelites groups
+// ID - 0x0011, GLONASS_and_GLONASS_GPS_groups - The switching between the sattelites groups
 // uint8(0 bit), 0 - GPS/GLONASS, 1 - GLONASS
-uint8_t GLONASS_and_GLONASS_GPS_groups = 0;
+uint8_t GLONASS_and_GLONASS_GPS_groups;
 
-// GsmRegistrationState - The state of the BEG registration in the GSM network
+// ID -0x0012, GsmRegistrationState - The state of the BEG registration in the GSM network
 // 0-1 bits, 0 - not registered, 1 - registered in the HomeGSM network
 // 2 - registered in the Roaming GSM network, 3 - not used
-uint8_t GsmRegistrationState = 0;
+uint8_t GsmRegistrationState;
 
-// GsmInnerError - if an error presents in the GSM module
+// ID - 0x0013, GsmInnerError - if an error presents in the GSM module
 // 0-1 bits, 0 - undefined, 1 - no errors, 2 - the inner error, 3 - not used
-uint8_t GsmInnerError = 0;
+uint8_t GsmInnerError;
 
-// VehicleCoordinatesReliabilityMem - Current value of vehicle coordinates reliability in memory
+// ID - 0x0014, VehicleCoordinatesReliabilityMem - Current value of vehicle coordinates reliability in memory
 // 0-1 bits, 0 - false, 1 - true, 2 - undefined, 3 - not used
-uint8_t VehicleCoordinatesReliabilityMem = 0;
+uint8_t VehicleCoordinatesReliabilityMem;
 
-// GsmRegistrationStateMem - The state of the BEG registration in the GSM network in memory
+// ID - 0x0015, GsmRegistrationStateMem - The state of the BEG registration in the GSM network in memory
 // 0-1 bits, 0 - not registered, 1 - registered in the Home GSM network,
 // 2 - registered in the Roaming GSM network, 3 - not used
-uint8_t GsmRegistrationStateMem = 0;
+uint8_t GsmRegistrationStateMem;
 
-// GsmRegistrationError - The parameter shows whether the module failed to register successfully or not
+// ID - 0x0016, GsmRegistrationError - The parameter shows whether the module failed to register successfully or not
 // 0-1 bits, 0 - undefined, 1 - no errors, 2 - error, 3 - not used
-uint8_t GsmRegistrationError = 0;
+uint8_t GsmRegistrationError;
 
-// EcallOn - This parameter specifies whether the emergency call is allowed or not
+// ID - 0x0017, EcallOn - This parameter specifies whether the emergency call is allowed or not
 // 0x3B - emergency call is active, 0xB3 - emergency call inactive
-uint8_t EcallOn = 0;
+uint8_t EcallOn;
 
-// CrashSignalExternal - This parameter specifies if external crash signal is active or not
+// ID - 0x0018, CrashSignalExternal - This parameter specifies if external crash signal is active or not
 // 0x8D - signal is active, 0xD8 - signal is inactive
-uint8_t CrashSignalExternal = 0;
+uint8_t CrashSignalExternal;
 
-// TestModeEndDistance - The distance radius in which allowed to carry selt-test, meters
+// ID - 0x0019, TestModeEndDistance - The distance radius in which allowed to carry selt-test, meters
 // uint16, min = 0, max = 0xFFFF
-uint16_t TestModeEndDistance = 0;
+uint16_t TestModeEndDistance;
 
-// GnssPowerOffTime - The switching off time of the GLONASS module after the ignition is off
+// ID - 0x001A, GnssPowerOffTime - The switching off time of the GLONASS module after the ignition is off
 // uint16, min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t GnssPowerOffTime = 0;
+uint16_t GnssPowerOffTime;
 
 // AutomationActivationProhibition - The prohibition of the automatic activation process
 // uint8(0 bit), 0 - activation allowed, 1 - activation prhibited
