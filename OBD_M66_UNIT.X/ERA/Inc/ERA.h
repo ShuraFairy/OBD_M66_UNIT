@@ -83,9 +83,9 @@
 #define SYSTEM_SUPPLIER_ECU_SOFTWARE_VERSION_NUMBER 0xF195
 #define VDIAG                                       0xF1A0
 //********************************* Ñonstants **********************************
- const uint16_t request_inputStateRecord [] = {INPUT_STATES_RECORD};
+ //const uint16_t request_inputStateRecord [] = {INPUT_STATES_RECORD};
 //********************************* Variables **********************************
-union __attribute__ ((far))  {
+extern union __attribute__ ((far))  {
     unsigned long long Data;
     struct 
     {
@@ -105,7 +105,7 @@ union __attribute__ ((far))  {
 } DIAGNOSTICS;  
 
 // ID - 0x0001, Description for inputStatesRecord
-union __attribute__ ((far))  {
+extern union __attribute__ ((far))  {
     uint16_t Data; 
     struct
     {
@@ -117,10 +117,10 @@ union __attribute__ ((far))  {
         uint8_t Input_3         : 2;    // 13-12 bits    // 0 - low, 1 - high, 2 - undefined, 3 - not used
         uint8_t Input_2         : 2;    // 15-14 bits    // 0 - low, 1 - high, 2 - undefined, 3 - not used
     } Bits;
-} inputStatesRecor;
+} inputStatesRecord;
 
 // ID - 0x0002, Description for outputStatesRecord
-union __attribute__ ((far))  {
+extern union __attribute__ ((far))  {
     uint32_t Data;  
     struct
     {
@@ -145,18 +145,18 @@ union __attribute__ ((far))  {
 
 // ID - 0x0003, Description for boardVoltage
 // Invalid Value = 0xFF, Min = 0, Max = 24.021, Formula - N = 0.0942 * E, Unit - V
-uint8_t  boardVoltage;
+extern uint8_t  boardVoltage;
 
 // ID - 0x0004, Description for reserveBatteryCharge
 // Invalid Value = 0xFF, Min = 0, Max = 100, Formula - N = 0.3922 * E, Unit - %
-uint8_t  reserveBatteryCharge;
+extern uint8_t  reserveBatteryCharge;
 
 // ID - 0x0005, Description for reserveBatteryTemperature
 // Invalid Value = 0xFF, Min = -40, Max = 87, Formula - N = 0.3922 * E, Unit - °C
-uint8_t reserveBatteryTemperature;
+extern uint8_t reserveBatteryTemperature;
 
 // ID - 0x0006, Description for SystemState
-union __attribute__ ((far))  {
+extern union __attribute__ ((far))  {
     uint32_t Data;  
     struct
     {
@@ -228,13 +228,13 @@ __attribute__ ((far)) struct vehicleCoordinates
 };
 
 // ID - 0x0008, vehicleCoordinatesReliability - Current value of vehicle coordinates reliability
-uint8_t vehicleCoordinatesReliability;      // 0 - false, 1 - true, 2 - undefined, 3 - not used
+extern uint8_t vehicleCoordinatesReliability;      // 0 - false, 1 - true, 2 - undefined, 3 - not used
 
 // ID - 0x0009, MDS_FormatVersion - Current format version of Minimum Data Set
-uint8_t MDS_FormatVersion;                  // uint8 (0 - 255)
+extern uint8_t MDS_FormatVersion;                  // uint8 (0 - 255)
 
 // ID - 0x000A, Description for vehicleFuelType
-union __attribute__ ((far))  {
+extern union __attribute__ ((far))  {
     uint8_t Data; 
     struct
     {
@@ -249,156 +249,156 @@ union __attribute__ ((far))  {
 } vehicleFuelType;
 
 // ID - 0x000B, timeStamp - Current value of seconds from 0:00 am 01/01/1970, Invalid valuex - 0xFFFFFFFF
-uint32_t timeStapm;     
+extern uint32_t timeStapm;     
 
 // ID - 0x000C, passengersNumber - Current value of passenger number
 // uint8, min = 0, max = 254, 0xFF - undefined
-uint8_t passengersNumber;
+extern uint8_t passengersNumber;
 
 // ID - 0x000D, TCM_working_mode - The working of TCM
 // 0x5A - working mode, 0xA5 - factory mode
-uint8_t TCM_working_mode;
+extern uint8_t TCM_working_mode;
 
 // ID - 0x000E, TCM_activation_source - The way of the TCM activation
 // 0 - non-activated, 1 - auto-activated, 2 - manually activated, 3 - undefined
-uint8_t TCM_activation_source;
+extern uint8_t TCM_activation_source;
 
 // ID - 0x000F, TCM_time_calculation - The source of the TIMESTAMP
 // uint8(0 bit), 0 - GPS/GLONASS, 1 - internal RTC
-uint8_t TCM_time_calculation;
+extern uint8_t TCM_time_calculation;
 
 // ID - 0x0010, ECALLManualCanCancel - Current state the ecall_manual_can_cancel
 // 0xC7 - active, 0x7C - inactive
-uint8_t ECALLManualCanCancel;
+extern uint8_t ECALLManualCanCancel;
 
 // ID - 0x0011, GLONASS_and_GLONASS_GPS_groups - The switching between the sattelites groups
 // uint8(0 bit), 0 - GPS/GLONASS, 1 - GLONASS
-uint8_t GLONASS_and_GLONASS_GPS_groups;
+extern uint8_t GLONASS_and_GLONASS_GPS_groups;
 
 // ID -0x0012, GsmRegistrationState - The state of the BEG registration in the GSM network
 // 0-1 bits, 0 - not registered, 1 - registered in the HomeGSM network
 // 2 - registered in the Roaming GSM network, 3 - not used
-uint8_t GsmRegistrationState;
+extern uint8_t GsmRegistrationState;
 
 // ID - 0x0013, GsmInnerError - if an error presents in the GSM module
 // 0-1 bits, 0 - undefined, 1 - no errors, 2 - the inner error, 3 - not used
-uint8_t GsmInnerError;
+extern uint8_t GsmInnerError;
 
 // ID - 0x0014, VehicleCoordinatesReliabilityMem - Current value of vehicle coordinates reliability in memory
 // 0-1 bits, 0 - false, 1 - true, 2 - undefined, 3 - not used
-uint8_t VehicleCoordinatesReliabilityMem;
+extern uint8_t VehicleCoordinatesReliabilityMem;
 
 // ID - 0x0015, GsmRegistrationStateMem - The state of the BEG registration in the GSM network in memory
 // 0-1 bits, 0 - not registered, 1 - registered in the Home GSM network,
 // 2 - registered in the Roaming GSM network, 3 - not used
-uint8_t GsmRegistrationStateMem;
+extern uint8_t GsmRegistrationStateMem;
 
 // ID - 0x0016, GsmRegistrationError - The parameter shows whether the module failed to register successfully or not
 // 0-1 bits, 0 - undefined, 1 - no errors, 2 - error, 3 - not used
-uint8_t GsmRegistrationError;
+extern uint8_t GsmRegistrationError;
 
 // ID - 0x0017, EcallOn - This parameter specifies whether the emergency call is allowed or not
 // 0x3B - emergency call is active, 0xB3 - emergency call inactive
-uint8_t EcallOn;
+extern uint8_t EcallOn;
 
 // ID - 0x0018, CrashSignalExternal - This parameter specifies if external crash signal is active or not
 // 0x8D - signal is active, 0xD8 - signal is inactive
-uint8_t CrashSignalExternal;
+extern uint8_t CrashSignalExternal;
 
 // ID - 0x0019, TestModeEndDistance - The distance radius in which allowed to carry selt-test, meters
 // uint16, min = 0, max = 0xFFFF
-uint16_t TestModeEndDistance;
+extern uint16_t TestModeEndDistance;
 
 // ID - 0x001A, GnssPowerOffTime - The switching off time of the GLONASS module after the ignition is off
 // uint16, min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t GnssPowerOffTime;
+extern uint16_t GnssPowerOffTime;
 
-// AutomationActivationProhibition - The prohibition of the automatic activation process
+// ID - 0x001B, AutomationActivationProhibition - The prohibition of the automatic activation process
 // uint8(0 bit), 0 - activation allowed, 1 - activation prhibited
-uint8_t AutomationActivationProhibition = 0;
+extern uint8_t AutomationActivationProhibition;
 
-// VehicleType - The vehicle type
+// ID - 0x001C, VehicleType - The vehicle type
 // 0-2 bits, 0 - M1 Passenger vehicle, 1 - M2 Autobus (<= 5 tonn), 2 - M3 Autobus (> 5 tonn),
 // 3 - N1 Truck (<= 3.5 tonn), 4 - N2 Truck (> 3.5 and <= 12 tonn),
 // 5 - N3 Truck (> 12 tonn), 6,7 - not used
-uint8_t VehicleType = 0;
+extern uint8_t VehicleType;
 
-// SimIdentifier - The ICCID number of the sim-chip, ASCII
-char SimIdentifier [19]; 
+// ID - 0x001D, SimIdentifier - The ICCID number of the sim-chip, ASCII
+extern char SimIdentifier [19]; 
 
-// CallAutoAnswerTime - The duration of the auto answer after the call from the TCM, minutes
+// ID - 0x0301, CallAutoAnswerTime - The duration of the auto answer after the call from the TCM, minutes
 // min = 0, max = 480, 0xFFFF - undefined
-uint16_t CallAutoAnswerTime = 0;
+extern uint16_t CallAutoAnswerTime;
 
-// ECALLTestNumber - The ECALL test number
+// ID - 0x0302, ECALLTestNumber - The ECALL test number
 // Null terminated string, Unused characters fill with 0x00
-char ECALLTestNumber [20];
+extern char ECALLTestNumber [20];
 
-// ECALLToTest - Whether the ECALL is the test number of the 112 emergency number
+// ID - 0x0303, ECALLToTest - Whether the ECALL is the test number of the 112 emergency number
 // 0 - ECALL is the 112 emergency number, 1 - ECALL is the test number,
 // 2 - ECALL is the debug number
-uint8_t ECALLToTest = 0;
+extern uint8_t ECALLToTest;
 
-// NadRegistrationTimer - The time of the deregistration from the network, minutes
+// ID - 0x0304, NadRegistrationTimer - The time of the deregistration from the network, minutes
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t NadRegistrationTimer = 0;
+extern uint16_t NadRegistrationTimer;
 
-// NadRegistrationAtStartup - The time, when the TCM will be registered in the network
+// ID - 0x0305, NadRegistrationAtStartup - The time, when the TCM will be registered in the network
 // uint8(0 bit), 0 - registration by call, 1 - registration at startup
-uint8_t NadRegistrationAtStartup = 0;
+extern uint8_t NadRegistrationAtStartup;
 
-// SMSCenterNumber - The SMS center number
+// ID - 0x0306, SMSCenterNumber - The SMS center number
 // Null terminated string, Unused characters fill with 0x00
-char SMSCenterNumber [20];
+extern char SMSCenterNumber [20];
 
-// SMSFallbackNumber - The SMS fallback number
+// ID - 0x0307, SMSFallbackNumber - The SMS fallback number
 // Null terminated string, Unused characters fill with 0x00
-char SMSFallbackNumber [20];
+extern char SMSFallbackNumber [20];
 
-// TestRegitrationPeriod - The time in minutes between next registration and end of the
+// ID - 0x030E, TestRegitrationPeriod - The time in minutes between next registration and end of the
 // PostRegistrationTime, if "Service functions" (test call, etc.) were initialized, minutes
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t TestRegitrationPeriod = 0;
+extern uint16_t TestRegitrationPeriod;
 
-// EcallManualDialAttempts - The number of manual eCall attempts
+// ID - 0x030F, EcallManualDialAttempts - The number of manual eCall attempts
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t EcallManualDialAttempts = 0;
+extern uint16_t EcallManualDialAttempts;
 
-// IntMemTransmitInterval - The time between tries to transmit MSD, minutes
+// ID - 0x0310, IntMemTransmitInterval - The time between tries to transmit MSD, minutes
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t IntMemTransmitInterval = 0;
+extern uint16_t IntMemTransmitInterval;
 
-// IntMemTransmitAttempts - The number of attempts to transmit MSD
+// ID - 0x0311, IntMemTransmitAttempts - The number of attempts to transmit MSD
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t IntMemTransmitAttempts = 0;
+extern uint16_t IntMemTransmitAttempts;
 
-// GSMSoftwareVersionNumber - GSM Software version number
+// ID - 0x0312, GSMSoftwareVersionNumber - GSM Software version number
 // Null terminated string, Unused characters fill with 0x00
-char GSMSoftwareVersionNumber [10];
+extern char GSMSoftwareVersionNumber [10];
 
-// SmsFallbackTestNumber - The SMS test fallback number
+// ID - 0x0316, SmsFallbackTestNumber - The SMS test fallback number
 // Null terminated string, Unused characters fill with 0x00
-char SmsFallbackTestNumber [20];
+extern char SmsFallbackTestNumber [20];
 
-// EcallAutoDialAttempts - The number of auto eCall attempts
+// ID - 0x0319, EcallAutoDialAttempts - The number of auto eCall attempts
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t EcallAutoDialAttempts = 0;
+extern uint16_t EcallAutoDialAttempts;
 
-// EcallDialDuration - The duration of ecall dial attempt, minutes
+// ID - 0x031A, EcallDialDuration - The duration of ecall dial attempt, minutes
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t EcallDialDuration = 0;
+extern uint16_t EcallDialDuration;
 
-// PostTestRegistrationTime - The time in seconds of registration after the end of the
+// ID - 0x031B, PostTestRegistrationTime - The time in seconds of registration after the end of the
 // "Service functions" (test call, etc.), minutes
 // min = 0, max = 0xFFFE, 0xFFFF - undefined
-uint16_t PostTestRegistrationTime = 0;
+extern uint16_t PostTestRegistrationTime;
 
-// SimProfileAmount - The number of SIM profiles
+// ID - 0x031C, SimProfileAmount - The number of SIM profiles
 // min = 0, max = 0xFE, 0xFF - undefined
-uint8_t SimProfileAmount = 0;
+extern uint8_t SimProfileAmount;
 
-// Description for SimProfile - The current SIM profile and manufacturer
-union __attribute__ ((far))  {
+// ID - 0x031D, Description for SimProfile - The current SIM profile and manufacturer
+extern union __attribute__ ((far))  {
     uint8_t Data; 
     struct
     {        
@@ -411,11 +411,11 @@ union __attribute__ ((far))  {
     } Bits;
 } SimProfile;
 
-// AudioProfile - The current audio profile
+// ID - 0x0323, AudioProfile - The current audio profile
 // min = 0, max = 250, 251-254 - not used, 0xFF - undefined
-uint8_t AudioProfile = 0;
+extern uint8_t AudioProfile;
 
-// Description for AccelerometerRawData - Raw data from accelerometer
+// ID - 0x0401, Description for AccelerometerRawData - Raw data from accelerometer
 __attribute__ ((far)) struct AccelerometerRawData
 {
     uint16_t X_axis_data;                           // Invalid value - 0xFFFF, Min = -32768, Max = 32767
@@ -428,92 +428,92 @@ __attribute__ ((far)) struct AccelerometerRawData
                                                     // angle, N = E
 };
 
-// RolloverAngle - Calibration angle for rollover detection, degree
+// ID - 0x0402, RolloverAngle - Calibration angle for rollover detection, degree
 // min = 0, max = 180, 0xFF - undefined
-uint8_t RolloverAngle = 0;
+extern uint8_t RolloverAngle;
 
-// RolloverTime - Calibration Time for rollover detection
+// ID - 0x0403, olloverTime - Calibration Time for rollover detection
 // Invalid Value - 0xFF, min = 0, max = 0xFE, Formule - N = E * 10
-uint8_t RolloverTime = 0;
+extern uint8_t RolloverTime;
 
-// AccelCalibrationX - Accelerometer axis data, g
+// ID - 0x0404, AccelCalibrationX - Accelerometer axis data, g
 // Invalid Value - 0xFFFF, min = -32768, max = 32767, Formula - N = E / 1200
-uint16_t AccelCalibrationX = 0;
+extern uint16_t AccelCalibrationX;
 
-// AccelCalibrationY - Accelerometer axis data, g
+// ID - 0x0405, AccelCalibrationY - Accelerometer axis data, g
 // Invalid Value - 0xFFFF, min = -32768, max = 32767, Formula - N = E / 1200
-uint16_t AccelCalibrationY = 0;
+extern uint16_t AccelCalibrationY;
 
-// AccelCalibrationZ - Accelerometer axis data, g
+// ID - 0x0406, AccelCalibrationZ - Accelerometer axis data, g
 // Invalid Value - 0xFFFF, min = -32768, max = 32767, Formula - N = E / 1200
-uint16_t AccelCalibrationZ = 0;
+extern uint16_t AccelCalibrationZ;
 
-// EcallNoAutomaticTriggering
+// ID - 0x0407, EcallNoAutomaticTriggering
 // 0x29 - prohibited, 0x92 - allowed
-uint8_t EcallNoAutomaticTriggering = 0;
+extern uint8_t EcallNoAutomaticTriggering;
 
-// MiddletState - State of GSM middlet
+// ID - 0x0408, MiddletState - State of GSM middlet
 // 0 - not activated, 1 - wait activation, 2 - activated
-uint8_t MiddletState = 0;
+extern uint8_t MiddletState;
 
-// SW_Version
+// ID - 0x0409, SW_Version
 // ASCII
-char SW_Version [27];
+extern char SW_Version [27];
 
-// Vehicle_SW_Version
+// ID - 0x040A, Vehicle_SW_Version
 // ASCII
-char Vehicle_SW_Version [24];
+extern char Vehicle_SW_Version [24];
 
-// Middlet_SW_Version
+// ID - 0x040B, Middlet_SW_Version
 // ASCII (only 0x30 - 0x39 char)
-char Middlet_SW_Version [24];
+extern char Middlet_SW_Version [24];
 
-// SavedMSDAmount - The total number of saved MSDs, which were unsent
+// ID - 0x01FF, SavedMSDAmount - The total number of saved MSDs, which were unsent
 // through the inband or SMS channel
 // min = 0, max = 100, 0xFF - undefined
-uint8_t SavedMSDAmount = 0;
+extern uint8_t SavedMSDAmount;
 
-// SentMSDAmount - The total number of saved MSDs, which were are in the
+// ID - 0x02FF, SentMSDAmount - The total number of saved MSDs, which were are in the
 // order to be sent
 // min = 0, max = 100, 0xFF - undefined
-uint8_t SentMSDAmount = 0;
+extern uint8_t SentMSDAmount;
 
-// vehicleManufacturerSparePartNumber - Order part number reference
+// ID - 0xF187, vehicleManufacturerSparePartNumber - Order part number reference
 // ASCII
-char vehicleManufacturerSparePartNumber [10];
+extern char vehicleManufacturerSparePartNumber [10];
 
-// ConfigurationFileReferenceLink - Corresponding PDX file name (combination of
+// ID - 0xF188, ConfigurationFileReferenceLink - Corresponding PDX file name (combination of
 // 0xF1A0, 0xF194, 0xF195, 0xF18A). Equal to reference to a physical part, consisting
 // from PCB + Boot + Application + Calibration
 // ASCII
-char ConfigurationFileReferenceLink [10];
+extern char ConfigurationFileReferenceLink [10];
 
-// systemSupplierIdentifier - The number identifies TCM supplier
+// ID - 0xF18A, systemSupplierIdentifier - The number identifies TCM supplier
 // ASCII
-char systemSupplierIdentifier [3];
+extern char systemSupplierIdentifier [3];
 
-// ECUSerialNumber - Serial number of TCM, placed on sticker
-char ECUSerialNumber [20];
+// ID - 0xF18C, ECUSerialNumber - Serial number of TCM, placed on sticker
+extern char ECUSerialNumber [20];
 
-// vehicleIdentificationNumber - Vehicle identification number
+// ID - 0xF190, vehicleIdentificationNumber - Vehicle identification number
 // ASCII
-char vehicleIdentificationNumber[17]; 
+extern char vehicleIdentificationNumber[17]; 
 
-// vehicleManufacturerECUHardwareNumber - This number identifies TCM hardware and bootloader
+// ID - 0xF191, vehicleManufacturerECUHardwareNumber - This number identifies TCM hardware and bootloader
 // ASCII
-char vehicleManufacturerECUHardwareNumber [10];
+extern char vehicleManufacturerECUHardwareNumber [10];
 
-// systemSupplierECUSoftwareNumber - Software Number of TCM
+// ID - 0xF194, systemSupplierECUSoftwareNumber - Software Number of TCM
 // ASCII
-char systemSupplierECUSoftwareNumber [2];
+extern char systemSupplierECUSoftwareNumber [2];
 
-// systemSupplierECUSoftwareVersionNumber - Software Version Number
+// ID - 0xF195, systemSupplierECUSoftwareVersionNumber - Software Version Number
 // ASCII
-char systemSupplierECUSoftwareVersionNumber [2];
+extern char systemSupplierECUSoftwareVersionNumber [2];
 
-// VDIAG - Diag Version
+// ID - 0xF1A0, VDIAG - Diag Version
 // min = 0, max = 0xFE, 0xFF - undefined
-uint8_t VDIAG = 0;
+extern uint8_t VersionDIAG;
 //****************************** Functions prototype ***************************
  
 
