@@ -13,7 +13,6 @@
             <sourceEncoding>windows-1251</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>ERA/Inc</sourceRootElem>
                 <sourceRootElem>.</sourceRootElem>
                 <sourceRootElem>ERA/Src</sourceRootElem>
             </sourceRootList>

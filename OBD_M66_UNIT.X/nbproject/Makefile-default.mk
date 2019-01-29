@@ -111,42 +111,42 @@ ${OBJECTDIR}/OBD_M66_UNIT.o: OBD_M66_UNIT.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o.d 
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o.ok ${OBJECTDIR}/OBD_M66_UNIT.o.err 
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o 
-	@${FIXDEPS} "${OBJECTDIR}/OBD_M66_UNIT.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/OBD_M66_UNIT.o.d" -o ${OBJECTDIR}/OBD_M66_UNIT.o OBD_M66_UNIT.c    
+	@${FIXDEPS} "${OBJECTDIR}/OBD_M66_UNIT.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/OBD_M66_UNIT.o.d" -o ${OBJECTDIR}/OBD_M66_UNIT.o OBD_M66_UNIT.c    
 	
 ${OBJECTDIR}/ECAN1Config.o: ECAN1Config.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o.d 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o.ok ${OBJECTDIR}/ECAN1Config.o.err 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN1Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN1Config.o.d" -o ${OBJECTDIR}/ECAN1Config.o ECAN1Config.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN1Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN1Config.o.d" -o ${OBJECTDIR}/ECAN1Config.o ECAN1Config.c    
 	
 ${OBJECTDIR}/ECAN1Drv.o: ECAN1Drv.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o.d 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o.ok ${OBJECTDIR}/ECAN1Drv.o.err 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN1Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN1Drv.o.d" -o ${OBJECTDIR}/ECAN1Drv.o ECAN1Drv.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN1Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN1Drv.o.d" -o ${OBJECTDIR}/ECAN1Drv.o ECAN1Drv.c    
 	
 ${OBJECTDIR}/ECAN2Config.o: ECAN2Config.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o.d 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o.ok ${OBJECTDIR}/ECAN2Config.o.err 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN2Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN2Config.o.d" -o ${OBJECTDIR}/ECAN2Config.o ECAN2Config.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN2Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN2Config.o.d" -o ${OBJECTDIR}/ECAN2Config.o ECAN2Config.c    
 	
 ${OBJECTDIR}/ECAN2Drv.o: ECAN2Drv.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o.d 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o.ok ${OBJECTDIR}/ECAN2Drv.o.err 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN2Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN2Drv.o.d" -o ${OBJECTDIR}/ECAN2Drv.o ECAN2Drv.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN2Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN2Drv.o.d" -o ${OBJECTDIR}/ECAN2Drv.o ECAN2Drv.c    
 	
 ${OBJECTDIR}/ERA/Src/ERA.o: ERA/Src/ERA.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/ERA/Src" 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o.d 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o.ok ${OBJECTDIR}/ERA/Src/ERA.o.err 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o 
-	@${FIXDEPS} "${OBJECTDIR}/ERA/Src/ERA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ERA/Src/ERA.o.d" -o ${OBJECTDIR}/ERA/Src/ERA.o ERA/Src/ERA.c    
+	@${FIXDEPS} "${OBJECTDIR}/ERA/Src/ERA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ERA/Src/ERA.o.d" -o ${OBJECTDIR}/ERA/Src/ERA.o ERA/Src/ERA.c    
 	
 else
 ${OBJECTDIR}/OBD_M66_UNIT.o: OBD_M66_UNIT.c  nbproject/Makefile-${CND_CONF}.mk
@@ -154,42 +154,42 @@ ${OBJECTDIR}/OBD_M66_UNIT.o: OBD_M66_UNIT.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o.d 
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o.ok ${OBJECTDIR}/OBD_M66_UNIT.o.err 
 	@${RM} ${OBJECTDIR}/OBD_M66_UNIT.o 
-	@${FIXDEPS} "${OBJECTDIR}/OBD_M66_UNIT.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/OBD_M66_UNIT.o.d" -o ${OBJECTDIR}/OBD_M66_UNIT.o OBD_M66_UNIT.c    
+	@${FIXDEPS} "${OBJECTDIR}/OBD_M66_UNIT.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/OBD_M66_UNIT.o.d" -o ${OBJECTDIR}/OBD_M66_UNIT.o OBD_M66_UNIT.c    
 	
 ${OBJECTDIR}/ECAN1Config.o: ECAN1Config.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o.d 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o.ok ${OBJECTDIR}/ECAN1Config.o.err 
 	@${RM} ${OBJECTDIR}/ECAN1Config.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN1Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN1Config.o.d" -o ${OBJECTDIR}/ECAN1Config.o ECAN1Config.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN1Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN1Config.o.d" -o ${OBJECTDIR}/ECAN1Config.o ECAN1Config.c    
 	
 ${OBJECTDIR}/ECAN1Drv.o: ECAN1Drv.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o.d 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o.ok ${OBJECTDIR}/ECAN1Drv.o.err 
 	@${RM} ${OBJECTDIR}/ECAN1Drv.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN1Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN1Drv.o.d" -o ${OBJECTDIR}/ECAN1Drv.o ECAN1Drv.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN1Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN1Drv.o.d" -o ${OBJECTDIR}/ECAN1Drv.o ECAN1Drv.c    
 	
 ${OBJECTDIR}/ECAN2Config.o: ECAN2Config.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o.d 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o.ok ${OBJECTDIR}/ECAN2Config.o.err 
 	@${RM} ${OBJECTDIR}/ECAN2Config.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN2Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN2Config.o.d" -o ${OBJECTDIR}/ECAN2Config.o ECAN2Config.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN2Config.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN2Config.o.d" -o ${OBJECTDIR}/ECAN2Config.o ECAN2Config.c    
 	
 ${OBJECTDIR}/ECAN2Drv.o: ECAN2Drv.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o.d 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o.ok ${OBJECTDIR}/ECAN2Drv.o.err 
 	@${RM} ${OBJECTDIR}/ECAN2Drv.o 
-	@${FIXDEPS} "${OBJECTDIR}/ECAN2Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ECAN2Drv.o.d" -o ${OBJECTDIR}/ECAN2Drv.o ECAN2Drv.c    
+	@${FIXDEPS} "${OBJECTDIR}/ECAN2Drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ECAN2Drv.o.d" -o ${OBJECTDIR}/ECAN2Drv.o ECAN2Drv.c    
 	
 ${OBJECTDIR}/ERA/Src/ERA.o: ERA/Src/ERA.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/ERA/Src" 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o.d 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o.ok ${OBJECTDIR}/ERA/Src/ERA.o.err 
 	@${RM} ${OBJECTDIR}/ERA/Src/ERA.o 
-	@${FIXDEPS} "${OBJECTDIR}/ERA/Src/ERA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -Os -MMD -MF "${OBJECTDIR}/ERA/Src/ERA.o.d" -o ${OBJECTDIR}/ERA/Src/ERA.o ERA/Src/ERA.c    
+	@${FIXDEPS} "${OBJECTDIR}/ERA/Src/ERA.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -mlarge-code -mlarge-data -mlarge-scalar -mconst-in-code -Os -MMD -MF "${OBJECTDIR}/ERA/Src/ERA.o.d" -o ${OBJECTDIR}/ERA/Src/ERA.o ERA/Src/ERA.c    
 	
 endif
 
@@ -198,11 +198,11 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}         -Wl,--defsym=__MPLAB_BUILD=1,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -o dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}         -Wl,--defsym=__MPLAB_BUILD=1,--gc-sections,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_ICD3=1
 else
 dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -o dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}         -Wl,--defsym=__MPLAB_BUILD=1,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION)
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -omf=elf -mcpu=$(MP_PROCESSOR_OPTION)  -o dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}         -Wl,--defsym=__MPLAB_BUILD=1,--gc-sections,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION)
 	${MP_CC_DIR}\\pic30-bin2hex dist/${CND_CONF}/${IMAGE_TYPE}/OBD_M66_UNIT.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} -omf=elf
 endif
 

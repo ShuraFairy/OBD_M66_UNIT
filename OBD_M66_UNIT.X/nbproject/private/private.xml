@@ -6,77 +6,77 @@
             <url>OBD_M66_UNIT.c</url>
             <bookmark id="120">
                 <name/>
-                <line>10140</line>
+                <line>10143</line>
                 <key/>
             </bookmark>
             <bookmark id="127">
                 <name/>
-                <line>10150</line>
+                <line>10153</line>
                 <key/>
             </bookmark>
             <bookmark id="125">
                 <name/>
-                <line>12124</line>
+                <line>12127</line>
                 <key/>
             </bookmark>
             <bookmark id="113">
                 <name/>
-                <line>26880</line>
+                <line>26883</line>
                 <key/>
             </bookmark>
             <bookmark id="112">
                 <name/>
-                <line>27636</line>
+                <line>27639</line>
                 <key/>
             </bookmark>
             <bookmark id="122">
                 <name/>
-                <line>27657</line>
+                <line>27660</line>
                 <key/>
             </bookmark>
             <bookmark id="115">
                 <name/>
-                <line>27820</line>
+                <line>27866</line>
                 <key/>
             </bookmark>
             <bookmark id="114">
                 <name/>
-                <line>28668</line>
+                <line>28714</line>
                 <key/>
             </bookmark>
             <bookmark id="118">
                 <name/>
-                <line>28963</line>
+                <line>29010</line>
                 <key/>
             </bookmark>
             <bookmark id="128">
                 <name/>
-                <line>34459</line>
+                <line>34507</line>
                 <key/>
             </bookmark>
             <bookmark id="110">
                 <name/>
-                <line>38037</line>
+                <line>38085</line>
                 <key/>
             </bookmark>
             <bookmark id="126">
                 <name/>
-                <line>38056</line>
+                <line>38104</line>
                 <key/>
             </bookmark>
             <bookmark id="119">
                 <name/>
-                <line>38883</line>
+                <line>38931</line>
                 <key/>
             </bookmark>
             <bookmark id="116">
                 <name/>
-                <line>38898</line>
+                <line>38946</line>
                 <key/>
             </bookmark>
             <bookmark id="121">
                 <name/>
-                <line>39625</line>
+                <line>39689</line>
                 <key/>
             </bookmark>
         </file>
@@ -86,8 +86,11 @@
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ERA/Src/ERA.c</file>
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/Variables.h</file>
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ERA/Inc/ERA.h</file>
+            <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ECAN1Config.c</file>
+            <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ECAN1Config.h</file>
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ECAN1Drv.h</file>
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ECAN2Drv.c</file>
+            <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/ERA/Inc/ERAConfig.h</file>
             <file>file:/C:/Repository%20OBD_M66_UNIT/OBD_M66_UNIT.X/OBD_M66_UNIT.c</file>
         </group>
     </open-files>

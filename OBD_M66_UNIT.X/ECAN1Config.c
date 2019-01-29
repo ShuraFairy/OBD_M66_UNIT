@@ -39,8 +39,9 @@ unsigned char __attribute__ ((far)) CAN1_DATA_buf [8];
 unsigned char __attribute__ ((far)) CANOBD_DATA_buf1 [8];
 unsigned char __attribute__ ((far)) CANOBD_DATA_buf2 [8];
 unsigned char __attribute__ ((far)) CANOBD_DATA_buf3 [8];
-volatile unsigned char __attribute__ ((far)) CAN1AUX_DATA_buf[25][8];
+volatile unsigned char __attribute__ ((fa)) CAN1AUX_DATA_buf[25][8];
 volatile unsigned long __attribute__ ((far)) CAN1AUX_ID_buf[25][1];
+    
 
 unsigned char BRPVAL1;
 unsigned int bitrate1, Fp1;

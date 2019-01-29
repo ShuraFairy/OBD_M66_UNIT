@@ -38,6 +38,9 @@
 # endif
 
 #include "Variables.h"
+#include "ERA/Inc/ERA.h"
+#include "ERA/Inc/ERAConfig.h"
+//#include "ERA.h"
 //#include "cancommon.h"
 
 // CONFIG
@@ -27683,6 +27686,49 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
             }
         }        
     }
+    // Диагностика 
+    if (  DIAGNOSTICSConfig.Bits.can_number != 0 ) { 
+        if (DIAGNOSTICSConfig.Bits.can_number == 1 && DIAGNOSTICSConfig.Bits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if (CAN1_DATA_buf[0] == 0x02){
+                if(CAN1_DATA_buf[1] == 0x21){
+                    if(CAN1_DATA_buf[2] == 0x01){
+                        if(CAN1_DATA_buf[3] == 0xAA){
+                            if(CAN1_DATA_buf[4] == 0xAA){
+                                if(CAN1_DATA_buf[5] == 0xAA){
+                                    if(CAN1_DATA_buf[6] == 0xAA){
+                                        if(CAN1_DATA_buf[7] == 0xAA){
+                                            Nop();
+                                            can_button = 1; 
+                                            Nop();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else { 
+                Nop();
+                can_button = 0; 
+                Nop();
+            }
+        }
+        if (DIAGNOSTICSConfig.Bits.can_number == 2 && DIAGNOSTICSConfig.Bits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+            if (( CAN2_DATA_buf[DIAGNOSTICSData.Bits.data0] & DIAGNOSTICSConfig.Bits.bit_mask )){// == CANTESTPRMSbits.value1) { 
+                Nop();
+                can_button = 1; 
+                Nop();
+            }
+            else { 
+                Nop();
+                can_button = 0; 
+                Nop();
+            }
+        }        
+    }
 
 
 // Сниффер !!!
@@ -28913,6 +28959,7 @@ void init_CAN_filters (void) {
     if (TOYOTAKEYDATbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
+    if (DIAGNOSTICSConfig.Bits.can_number == 1) ecan1WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
     
 //    ecan1WriteRxAcptFilter( 13,(long)0x7E8, (unsigned int)CAN1SETTINGSbits.ide, 5, 3); //OBD 
 //    ecan1WriteRxAcptFilter( 14,(long)0x7E9, (unsigned int)CAN1SETTINGSbits.ide, 6, 3); //OBD 
@@ -28963,6 +29010,7 @@ void init_CAN_filters (void) {
     if (TOYOTAKEYDATbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
+    if (DIAGNOSTICSConfig.Bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
     
     //    ecan2WriteRxAcptMask  ( 3, 0x1FFFFFF0, 1, 0 );
     
@@ -38904,7 +38952,23 @@ unsigned int i;
     CANTESTPRMSbits.value1      = 0x0;
     CANTESTPRMSbits.value2      = 0x0;
     CANTESTPRMSbits.id          = 0x7DA;
-//\//        
+//\//   
+    DIAGNOSTICSConfig.Bits.can_number   = 0x01;
+    DIAGNOSTICSConfig.Bits.filt_number  = 0x06;
+    DIAGNOSTICSConfig.Bits.bit_mask     = 0xFF;
+    DIAGNOSTICSConfig.Bits.id           = 0x7CA;
+    DIAGNOSTICSData.Bits.data0          = 0x00;
+    DIAGNOSTICSData.Bits.data1          = 0x00;
+    DIAGNOSTICSData.Bits.data2          = 0x00;
+    DIAGNOSTICSData.Bits.data3          = 0x00;
+    DIAGNOSTICSData.Bits.data4          = 0x00;
+    DIAGNOSTICSData.Bits.data5          = 0x00;
+    DIAGNOSTICSData.Bits.data6          = 0x00;
+    DIAGNOSTICSData.Bits.data7          = 0x00;
+    vehicleCoordinates.vehicleLattitude = 0x00;
+
+//
+    
     
     Fp1 = 20; Fp2 = 20;
     can1start();
