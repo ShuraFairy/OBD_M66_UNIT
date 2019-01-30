@@ -38,9 +38,9 @@
 # endif
 
 #include "Variables.h"
-#include "ERA/Inc/ERA.h"
-#include "ERA/Inc/ERAConfig.h"
-//#include "ERA.h"
+#include "ERA/Inc/ERADiagnostic.h"
+#include "ERA/Inc/ERADiagnosticConfig.h"
+
 //#include "cancommon.h"
 
 // CONFIG
@@ -27687,28 +27687,20 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
         }        
     }
     // Диагностика 
-    if (  DIAGNOSTICSConfig.Bits.can_number != 0 ) { 
+    if (  DIAGNOSTICSConfig.Bits.can_number != 0 ) 
+    { 
         if (DIAGNOSTICSConfig.Bits.can_number == 1 && DIAGNOSTICSConfig.Bits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
-            if (CAN1_DATA_buf[0] == 0x02){
-                if(CAN1_DATA_buf[1] == 0x21){
-                    if(CAN1_DATA_buf[2] == 0x01){
-                        if(CAN1_DATA_buf[3] == 0xAA){
-                            if(CAN1_DATA_buf[4] == 0xAA){
-                                if(CAN1_DATA_buf[5] == 0xAA){
-                                    if(CAN1_DATA_buf[6] == 0xAA){
-                                        if(CAN1_DATA_buf[7] == 0xAA){
-                                            Nop();
-                                            can_button = 1; 
-                                            Nop();
-                                        }
-                                    }
-                                }
-                            }
-                        }
+            if ((CAN1_DATA_buf[0] == 0x02) && (CAN1_DATA_buf[3] == 0xAA) && (CAN1_DATA_buf[4] == 0xAA) && 
+                    (CAN1_DATA_buf[5] == 0xAA) && (CAN1_DATA_buf[6] == 0xAA) && (CAN1_DATA_buf[7] == 0xAA)) {
+                if(CAN1_DATA_buf[1] == 0x21) {
+                    if(CAN1_DATA_buf[2] == 0x01) {                                        
+                        Nop();
+                        can_button = 1; 
+                        Nop();              
                     }
                 }
-            }
+            }        
             else { 
                 Nop();
                 can_button = 0; 
