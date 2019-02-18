@@ -27687,38 +27687,20 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
         }        
     }
     // Диагностика 
-    if (  DIAGNOSTICSConfig.Bits.can_number != 0 ) 
+    if (DIAGNOSTICSConfig.Bits.can_number != 0) 
     { 
         if (DIAGNOSTICSConfig.Bits.can_number == 1 && DIAGNOSTICSConfig.Bits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
             if ((CAN1_DATA_buf[0] == 0x02) && (CAN1_DATA_buf[3] == 0xAA) && (CAN1_DATA_buf[4] == 0xAA) && 
                     (CAN1_DATA_buf[5] == 0xAA) && (CAN1_DATA_buf[6] == 0xAA) && (CAN1_DATA_buf[7] == 0xAA)) {
-                if(CAN1_DATA_buf[1] == 0x21) {
-                    if(CAN1_DATA_buf[2] == 0x01) {                                        
-                        Nop();
-                        can_button = 1; 
-                        Nop();              
-                    }
-                }
+                parsingRequestERADiagnostic(CAN1_DATA_buf[1], 0x0, CAN1_DATA_buf[2]);
+                
             }        
-            else { 
-                Nop();
-                can_button = 0; 
-                Nop();
-            }
+            
         }
         if (DIAGNOSTICSConfig.Bits.can_number == 2 && DIAGNOSTICSConfig.Bits.id == ID2_tmp) {
             generate_canbus_sleep_message ( 2 );
-            if (( CAN2_DATA_buf[DIAGNOSTICSData.Bits.data0] & DIAGNOSTICSConfig.Bits.bit_mask )){// == CANTESTPRMSbits.value1) { 
-                Nop();
-                can_button = 1; 
-                Nop();
-            }
-            else { 
-                Nop();
-                can_button = 0; 
-                Nop();
-            }
+        
         }        
     }
 
@@ -27729,6 +27711,112 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
             Nop();Nop();Nop();
             redirect_can_to_uart ( (unsigned long)ID_tmp );
 //        }
+    }
+
+// Fuel Level - Уровень топлива
+    if (FUELLEVELbits.can_number != 0) { 
+        if (FUELLEVELbits.can_number == 1 && FUELLEVELbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if ((CAN1_DATA_buf[0] == 0xFF) && (CAN1_DATA_buf[2] == 0xFF) && (CAN1_DATA_buf[3] == 0xFF) && (CAN1_DATA_buf[4] == 0xFF) && 
+                    (CAN1_DATA_buf[5] == 0xFF) && (CAN1_DATA_buf[6] == 0xFF) && (CAN1_DATA_buf[7] == 0xFF)) {
+                FUELLEVELbits.value = CAN1_DATA_buf[1];                
+            }  
+            
+        }
+        if (FUELLEVELbits.can_number == 2 && FUELLEVELbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
+    }
+
+// Total Fuel Used - Общее израсходованное топливо
+    if (TOTALFUELUSEDCONFbits.can_number != 0) { 
+        if (TOTALFUELUSEDCONFbits.can_number == 1 && TOTALFUELUSEDCONFbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if ((CAN1_DATA_buf[0] == 0x00) && (CAN1_DATA_buf[1] == 0x00) && (CAN1_DATA_buf[2] == 0x00) && // ???
+                    (CAN1_DATA_buf[3] == 0x00)) {
+                TOTALFUELUSEDbits.value1 = CAN1_DATA_buf[4];
+                TOTALFUELUSEDbits.value2 = CAN1_DATA_buf[5];
+                TOTALFUELUSEDbits.value3 = CAN1_DATA_buf[6];
+                TOTALFUELUSEDbits.value4 = CAN1_DATA_buf[7];
+            }  
+            
+        }
+        if (TOTALFUELUSEDCONFbits.can_number == 2 && TOTALFUELUSEDCONFbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
+    }
+
+// High Resolution Total Vehicle Distance - Общий пробег
+    if (TOTALVEHICLEDISTANCECONFbits.can_number != 0) { 
+        if (TOTALVEHICLEDISTANCECONFbits.can_number == 1 && TOTALFUELUSEDCONFbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if ((CAN1_DATA_buf[4] == 0x80) && (CAN1_DATA_buf[5] == 0x31) && (CAN1_DATA_buf[6] == 0x03) && // ????
+                    (CAN1_DATA_buf[7] == 0x00)) {
+                TOTALVEHICLEDISTANCEbits.value1 = CAN1_DATA_buf[0];
+                TOTALVEHICLEDISTANCEbits.value2 = CAN1_DATA_buf[1];
+                TOTALVEHICLEDISTANCEbits.value3 = CAN1_DATA_buf[2];
+                TOTALVEHICLEDISTANCEbits.value4 = CAN1_DATA_buf[3];
+            }  
+            
+        }
+        if (TOTALVEHICLEDISTANCECONFbits.can_number == 2 && TOTALVEHICLEDISTANCECONFbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
+    }
+
+// Total Engine Hours - Общее количество моточасов
+    if (ENGINETOTALHOURSCONFbits.can_number != 0) { 
+        if (ENGINETOTALHOURSCONFbits.can_number == 1 && ENGINETOTALHOURSCONFbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if ((CAN1_DATA_buf[4] == 0x02) && (CAN1_DATA_buf[5] == 0x0C) && (CAN1_DATA_buf[6] == 0x00) && // ????
+                    (CAN1_DATA_buf[7] == 0x00)) {
+                ENGINETOTALHOURSbits.value1 = CAN1_DATA_buf[0];
+                ENGINETOTALHOURSbits.value2 = CAN1_DATA_buf[1];
+                ENGINETOTALHOURSbits.value3 = CAN1_DATA_buf[2];
+                ENGINETOTALHOURSbits.value4 = CAN1_DATA_buf[3];
+            }  
+            
+        }
+        if (ENGINETOTALHOURSCONFbits.can_number == 2 && ENGINETOTALHOURSCONFbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
+    }
+
+// Engine Coolant Temperature - Температура охлаждающей жидкости
+    if ( EGINECOOLANTTEMPERATUREbits.can_number != 0) { 
+        if (EGINECOOLANTTEMPERATUREbits.can_number == 1 && EGINECOOLANTTEMPERATUREbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            //if ((CAN1_DATA_buf[1] == 0xFF) && (CAN1_DATA_buf[2] == 0xFF) && (CAN1_DATA_buf[3] == 0xFF) && (CAN1_DATA_buf[4] == 0xFF) && 
+            //        (CAN1_DATA_buf[5] == 0xFF) && (CAN1_DATA_buf[6] == 0xFF) && (CAN1_DATA_buf[7] == 0xFF)) {   // ?????
+                EGINECOOLANTTEMPERATUREbits.value = CAN1_DATA_buf[0];                
+            //}  
+            
+        }
+        if (EGINECOOLANTTEMPERATUREbits.can_number == 2 && EGINECOOLANTTEMPERATUREbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
+    }
+
+// Service Distance - Пробег до ТО
+    if (SERVICEDISTANCEbits.can_number != 0) { 
+        if (SERVICEDISTANCEbits.can_number == 1 && SERVICEDISTANCEbits.id == ID_tmp) {
+            generate_canbus_sleep_message ( 1 );
+            if ((CAN1_DATA_buf[0] == 0xFF) && (CAN1_DATA_buf[3] == 0xFF) && (CAN1_DATA_buf[4] == 0xFF) && 
+                    (CAN1_DATA_buf[5] == 0xFF) && (CAN1_DATA_buf[6] == 0xFF) && (CAN1_DATA_buf[7] == 0xFF)) {  
+                SERVICEDISTANCEbits.value1 = CAN1_DATA_buf[1];
+                SERVICEDISTANCEbits.value2 = CAN1_DATA_buf[2];
+            }  
+            
+        }
+        if (SERVICEDISTANCEbits.can_number == 2 && SERVICEDISTANCEbits.id == ID2_tmp) {
+            generate_canbus_sleep_message ( 2 );
+        
+        }        
     }
 
 }
@@ -28951,7 +29039,21 @@ void init_CAN_filters (void) {
     if (TOYOTAKEYDATbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
-    if (DIAGNOSTICSConfig.Bits.can_number == 1) ecan1WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
+    //if (DIAGNOSTICSConfig.Bits.can_number == 1) ecan1WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
+    
+    CAN1SETTINGSbits.ide = 1;   // extented - 29 bit   
+    if (FUELLEVELbits.can_number == 1) ecan1WriteRxAcptFilter( (int)FUELLEVELbits.filt_number, 
+            (long)FUELLEVELbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Fuel Level - Уровень топлива
+    if (TOTALFUELUSEDCONFbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOTALFUELUSEDCONFbits.filt_number, 
+            (long)TOTALFUELUSEDCONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Total Fuel Used - Общее израсходованное топливо
+    if (TOTALVEHICLEDISTANCECONFbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOTALVEHICLEDISTANCECONFbits.filt_number, 
+            (long)TOTALVEHICLEDISTANCECONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // High Resolution Total Vehicle Distance - Общий пробег
+    if (ENGINETOTALHOURSCONFbits.can_number == 1) ecan1WriteRxAcptFilter( (int)ENGINETOTALHOURSCONFbits.filt_number, 
+            (long)ENGINETOTALHOURSCONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Total Engine Hoursel - Общее количество моточасов
+    if (EGINECOOLANTTEMPERATUREbits.can_number == 1) ecan1WriteRxAcptFilter( (int)EGINECOOLANTTEMPERATUREbits.filt_number, 
+            (long)EGINECOOLANTTEMPERATUREbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Engine Coolant Temperature - Температура охлаждающей жидкости
+    if (SERVICEDISTANCEbits.can_number == 1) ecan1WriteRxAcptFilter( (int)SERVICEDISTANCEbits.filt_number, 
+            (long)SERVICEDISTANCEbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Service Distance - Пробег до ТО
     
 //    ecan1WriteRxAcptFilter( 13,(long)0x7E8, (unsigned int)CAN1SETTINGSbits.ide, 5, 3); //OBD 
 //    ecan1WriteRxAcptFilter( 14,(long)0x7E9, (unsigned int)CAN1SETTINGSbits.ide, 6, 3); //OBD 
@@ -29002,8 +29104,21 @@ void init_CAN_filters (void) {
     if (TOYOTAKEYDATbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
-    if (DIAGNOSTICSConfig.Bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
+    //if (DIAGNOSTICSConfig.Bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
     
+    CAN1SETTINGSbits.ide = 1;   // extented - 29 bit   
+    if (FUELLEVELbits.can_number == 2) ecan1WriteRxAcptFilter( (int)FUELLEVELbits.filt_number, 
+            (long)FUELLEVELbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Fuel Level - Уровень топлива
+    if (TOTALFUELUSEDCONFbits.can_number == 2) ecan1WriteRxAcptFilter( (int)TOTALFUELUSEDCONFbits.filt_number, 
+            (long)TOTALFUELUSEDCONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Total Fuel Used - Общее израсходованное топливо
+    if (TOTALVEHICLEDISTANCECONFbits.can_number == 2) ecan1WriteRxAcptFilter( (int)TOTALVEHICLEDISTANCECONFbits.filt_number, 
+            (long)TOTALVEHICLEDISTANCECONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // High Resolution Total Vehicle Distance - Общий пробег
+    if (ENGINETOTALHOURSCONFbits.can_number == 2) ecan1WriteRxAcptFilter( (int)ENGINETOTALHOURSCONFbits.filt_number, 
+            (long)ENGINETOTALHOURSCONFbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Total Engine Hoursel - Общее количество моточасов
+    if (EGINECOOLANTTEMPERATUREbits.can_number == 2) ecan1WriteRxAcptFilter( (int)EGINECOOLANTTEMPERATUREbits.filt_number, 
+            (long)EGINECOOLANTTEMPERATUREbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Engine Coolant Temperature - Температура охлаждающей жидкости
+    if (SERVICEDISTANCEbits.can_number == 2) ecan1WriteRxAcptFilter( (int)SERVICEDISTANCEbits.filt_number, 
+            (long)SERVICEDISTANCEbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // Service Distance - Пробег до ТО
     //    ecan2WriteRxAcptMask  ( 3, 0x1FFFFFF0, 1, 0 );
     
 /* Enter Normal Mode */
@@ -38944,8 +39059,9 @@ unsigned int i;
     CANTESTPRMSbits.value1      = 0x0;
     CANTESTPRMSbits.value2      = 0x0;
     CANTESTPRMSbits.id          = 0x7DA;
-//\//   
-    DIAGNOSTICSConfig.Bits.can_number   = 0x01;
+//\//
+    initTruckVariables();
+/*    DIAGNOSTICSConfig.Bits.can_number   = 0x01;
     DIAGNOSTICSConfig.Bits.filt_number  = 0x06;
     DIAGNOSTICSConfig.Bits.bit_mask     = 0xFF;
     DIAGNOSTICSConfig.Bits.id           = 0x7CA;
@@ -38956,9 +39072,7 @@ unsigned int i;
     DIAGNOSTICSData.Bits.data4          = 0x00;
     DIAGNOSTICSData.Bits.data5          = 0x00;
     DIAGNOSTICSData.Bits.data6          = 0x00;
-    DIAGNOSTICSData.Bits.data7          = 0x00;
-    vehicleCoordinates.vehicleLattitude = 0x00;
-
+    DIAGNOSTICSData.Bits.data7          = 0x00;*/
 //
     
     
@@ -40850,6 +40964,87 @@ while (1) {
     Nop();Nop();Nop();
 }
 */
+//////////////////////////////////////////////////////////////////////////////// 
+void parsingRequestERADiagnostic(uint8_t IDDiagnosticService, uint8_t IDParameterHigh, uint8_t IDParameterLow)
+{
+    volatile uint8_t prosto_temp = 233;
+    //uint16_t IDParameter = 0;
+    //uint16_t temp = 0;  
+    uint16_t dataToSend1 = 0;
+    uint16_t dataToSend2 = 0;
+    uint16_t dataToSend3 = 0;
+    uint16_t dataToSend4 = 0;    
+  
+        
+    __temp = (uint16_t)(IDParameterHigh);
 
+    IDParameter = (__temp << 8) + (IDParameterLow);
+            
+    if(IDDiagnosticService == 0x21)
+    {
+        switch(IDParameter)
+        {
+            case 0x0001:
+            {    
+                __temp = IDParameter;
+                Nop();                 
+                Nop();
+                break;
+            }
+            default:
+                break;
+        }
+    }
+   
+}
+////////////////////////////////////////////////////////////////////////////////
+void responseERADiagnostic(uint16_t * data1, uint16_t * data2, uint16_t * data3, uint16_t * data4)
+{
+    ecan1WriteTxMsgBufId ( 3, (long) 0x7CA, (unsigned int) 0, (unsigned int) 0 );
+    ecan1WriteTxMsgBufData( 3, (unsigned int) 8, 0x0322, 0x0003, 0xAAAA, 0xAAAA );
+    settxtransmit( 3 );
+}
+////////////////////////////////////////////////////////////////////////////////
+void initTruckVariables(void)
+{    
+    FUELLEVELbits.can_number                    = 0x1;
+    FUELLEVELbits.filt_number                   = 0x4;
+    FUELLEVELbits.value                         = 0x0;
+    FUELLEVELbits.id                            = 0x18FEFC21;    
+    
+    TOTALFUELUSEDCONFbits.can_number            = 0x1;
+    TOTALFUELUSEDCONFbits.filt_number           = 0x5;
+    TOTALFUELUSEDCONFbits.id                    = 0x18FEE927;
+    TOTALFUELUSEDbits.value1                    = 0x0;
+    TOTALFUELUSEDbits.value2                    = 0x0;
+    TOTALFUELUSEDbits.value3                    = 0x0;
+    TOTALFUELUSEDbits.value4                    = 0x0; 
+    
+    TOTALVEHICLEDISTANCECONFbits.can_number     = 0x1;
+    TOTALVEHICLEDISTANCECONFbits.filt_number    = 0x6;
+    TOTALVEHICLEDISTANCECONFbits.id             = 0x18FEC1EE;
+    TOTALVEHICLEDISTANCEbits.value1             = 0x0;
+    TOTALVEHICLEDISTANCEbits.value2             = 0x0;
+    TOTALVEHICLEDISTANCEbits.value3             = 0x0;
+    TOTALVEHICLEDISTANCEbits.value4             = 0x0;
+ 
+    ENGINETOTALHOURSCONFbits.can_number         = 0x1;
+    ENGINETOTALHOURSCONFbits.filt_number        = 0x7;
+    ENGINETOTALHOURSCONFbits.id                 = 0x18FEE527;
+    ENGINETOTALHOURSbits.value1                 = 0x0;
+    ENGINETOTALHOURSbits.value2                 = 0x0;
+    ENGINETOTALHOURSbits.value3                 = 0x0;
+    ENGINETOTALHOURSbits.value4                 = 0x0;
 
+    EGINECOOLANTTEMPERATUREbits.can_number      = 0x1;
+    EGINECOOLANTTEMPERATUREbits.filt_number     = 0x8;
+    EGINECOOLANTTEMPERATUREbits.id              = 0x18FEEE00;
+    EGINECOOLANTTEMPERATUREbits.value           = 0x0;
+    
+    SERVICEDISTANCEbits.can_number              = 0x1;
+    SERVICEDISTANCEbits.filt_number             = 0x9;
+    SERVICEDISTANCEbits.id                      = 0x18FEC027;
+    SERVICEDISTANCEbits.value1                  = 0x0;
+    SERVICEDISTANCEbits.value2                  = 0x0;
+}
 
