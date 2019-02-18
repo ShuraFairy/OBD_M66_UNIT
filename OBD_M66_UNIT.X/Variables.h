@@ -8,6 +8,183 @@
 #ifndef VARIABLES_H
 #define	VARIABLES_H
 
+#include <stdint.h>
+//********************************* Variables **********************************
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - Service Information: SERV
+// ID - 0x18FEC027
+// spn914 - Service Distance - The distance which can be traveled by the vehicle before the next service inspection is required.
+// A negative distance is transmitted if the service inspection has been passed. The component that requires service is identified by the
+// service component identification (see SPN 911-913, 1379, and 1584).
+// Data Length:                     2 bytes
+// Resolution:                      5 km/bit , -160,635 km offset
+// Data Range:                      -160,635 to 160,640 km
+// Type:                            Measured
+// Suspect Parameter Number:        914
+// Parameter Group Number (PGN):    0x00FEC0 (65216)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t SERVICEDISTANCE;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;		
+        uint16_t             : 10;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint8_t  value1      : 8;
+        uint8_t  value2      : 8;
+    };
+} SERVICEDISTANCEbits;
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - Engine Temperature 1: ET1
+// ID - 0x18FEEE00
+// spn110 - Engine Coolant Temperature - Temperature of liquid found in engine cooling system.
+// Data Length:                     1 byte
+// Resolution:                      1 deg C/bit , -40 deg C offset
+// Data Range:                      -40 to 210 deg C
+// Type:                            Measured
+// Suspect Parameter Number:        110
+// Parameter Group Number (PGN):    0x00FEEE (65262)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t EGINECOOLANTTEMPERATURE;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;
+		uint8_t  value       : 8;
+        uint8_t              : 2;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint16_t             : 16;              
+    };
+} EGINECOOLANTTEMPERATUREbits;
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - Engine Hours, Revolutions: HOURS
+// ID - 0x18FEE527
+// spn247 - Total Engine Hours - Accumulated time of operation of engine.
+// Data Length:                     4 bytes
+// Resolution:                      0.05 hr/bit , 0 offset
+// Data Range:                      0 to 210,554,060.75 hr
+// Type:                            Measured
+// Suspect Parameter Number:        247
+// Parameter Group Number (PGN):    0x00FEE5 (65253)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t ENGINETOTALHOURSCONF;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;
+        uint16_t             : 10;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint16_t             : 16;              
+    };
+} ENGINETOTALHOURSCONFbits;
+union __attribute__ ((far))  {
+    uint32_t ENGINETOTALHOURS;
+    struct 
+    {        
+		uint8_t  value1      : 8;
+        uint8_t  value2      : 8;
+        uint8_t  value3      : 8;
+        uint8_t  value4      : 8;                    
+    };
+} ENGINETOTALHOURSbits;
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - High Resolution Vehicle Distance: VHDR
+// ID - 0x18FEC1EE
+// spn917 - High Resolution Total Vehicle Distance - Accumulated distance traveled by the vehicle during its
+// operation. NOTE - See SPN 245 for alternate resolution.
+// Data Length:                     4 bytes
+// Resolution:                      5 m/bit , 0 offset
+// Data Range:                      0 to 21,055,406 km
+// Type:                            Measured
+// Suspect Parameter Number:        917
+// Parameter Group Number (PGN):    0x00FEC1 (65217)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t TOTALVEHICLEDISTANCECONF;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;
+        uint16_t             : 10;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint16_t             : 16;              
+    };
+} TOTALVEHICLEDISTANCECONFbits;
+union __attribute__ ((far))  {
+    uint32_t TOTALVEHICLEDISTANCE;
+    struct 
+    {        
+		uint8_t  value1      : 8;
+        uint8_t  value2      : 8;
+        uint8_t  value3      : 8;
+        uint8_t  value4      : 8;                    
+    };
+} TOTALVEHICLEDISTANCEbits;
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - Fuel Consumption: LFC
+// ID - 0x18FEE927
+// spn250 - Total Fuel Used - Accumulated amount of fuel used during vehicle operation.
+// Data Length:                     4 bytes
+// Resolution:                      0.5 L/bit , 0 offset
+// Data Range:                      0 to 2,105,540,607.5 L
+// Type:                            Measured
+// Suspect Parameter Number:        250
+// Parameter Group Number (PGN):    0x00FEE9(65257)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t TOTALFUELUSEDCONF;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;
+        uint16_t             : 10;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint16_t             : 16;              
+    };
+} TOTALFUELUSEDCONFbits;
+union __attribute__ ((far))  {
+    uint32_t TOTALFUELUSED;
+    struct 
+    {        
+		uint8_t  value1      : 8;
+        uint8_t  value2      : 8;
+        uint8_t  value3      : 8;
+        uint8_t  value4      : 8;                    
+    };
+} TOTALFUELUSEDbits;
+////////////////////////////////////////////////////////////////////////////////
+// FMS-Stantard description - Dash Display: DD
+// ID - 0x18FEFC21
+// spn96 - Fuel Level - Ratio of volume of fuel to the total volume of fuel storage container.
+// Data Length:                     1 byte
+// Resolution:                      0.4 %/bit , 0 offset
+// Data Range:                      0 to 100 %
+// Type:                            Measured
+// Suspect Parameter Number:        96
+// Parameter Group Number (PGN):    0x00FEFC (65276)
+// Rep. Rate:                       1000 ms
+union __attribute__ ((far))  {
+    uint64_t FUELLEVEL;
+    struct 
+    {
+        uint8_t  can_number  : 2;
+        uint8_t  filt_number : 4;
+		uint8_t  value       : 8;
+        uint8_t              : 2;
+        uint32_t id          : 29;
+        uint8_t              : 3;
+        uint16_t             : 16;              
+    };
+} FUELLEVELbits;
+////////////////////////////////////////////////////////////////////////////////
 union __attribute__ ((far))  {
     unsigned long long CANTESTPRMS;
     struct 
@@ -22,6 +199,7 @@ union __attribute__ ((far))  {
         unsigned char byte          : 3;        
     };
 } CANTESTPRMSbits;    
+////////////////////////////////////////////////////////////////////////////////
 union __attribute__ ((far))  {
     uint32_t Data;   
     struct 
@@ -29,10 +207,12 @@ union __attribute__ ((far))  {
 		uint8_t can_number  : 2;
         uint8_t filt_number : 4;
         uint8_t bit_mask    : 8; 
-        uint16_t id         : 11;    
+        uint8_t             : 2;    
+        uint16_t id         : 11;
+        uint8_t             : 5;
     } Bits;
 } DIAGNOSTICSConfig;  
-
+////////////////////////////////////////////////////////////////////////////////
 union __attribute__ ((far))  {
     uint64_t Data;   
     struct 
@@ -458,6 +638,13 @@ char systemSupplierECUSoftwareVersionNumber [2];
 // ID - 0xF1A0, VDIAG - Diag Version
 // min = 0, max = 0xFE, 0xFF - undefined
 uint8_t VersionDIAG = 0;
+
+
+uint16_t IDParameter;
+uint16_t __temp;
+
+//****************************** Functions prototype ***************************
+void initTruckVariables(void);
 
 #endif	/* VARIABLES_H */
 
