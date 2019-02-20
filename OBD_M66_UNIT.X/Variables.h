@@ -27,13 +27,13 @@ union __attribute__ ((far))  {
     uint64_t SERVICEDISTANCE;
     struct 
     {
+        uint8_t  value1      : 8;
+        uint8_t  value2      : 8;
         uint8_t  can_number  : 2;
         uint8_t  filt_number : 4;		
         uint16_t             : 10;
         uint32_t id          : 29;
-        uint8_t              : 3;
-        uint8_t  value1      : 8;
-        uint8_t  value2      : 8;
+        uint8_t              : 3;        
     };
 } SERVICEDISTANCEbits;
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,9 +51,9 @@ union __attribute__ ((far))  {
     uint64_t EGINECOOLANTTEMPERATURE;
     struct 
     {
+        uint8_t  value       : 8;
         uint8_t  can_number  : 2;
-        uint8_t  filt_number : 4;
-		uint8_t  value       : 8;
+        uint8_t  filt_number : 4;		
         uint8_t              : 2;
         uint32_t id          : 29;
         uint8_t              : 3;
@@ -175,11 +175,11 @@ union __attribute__ ((far))  {
     uint64_t FUELLEVEL;
     struct 
     {
+        uint8_t  value       : 8;
         uint8_t  can_number  : 2;
-        uint8_t  filt_number : 4;
-		uint8_t  value       : 8;
+        uint8_t  filt_number : 4;		
         uint8_t              : 2;
-        uint32_t id          : 29;
+        uint32_t id          : 29;        
         uint8_t              : 3;
         uint16_t             : 16;              
     };
@@ -645,6 +645,39 @@ uint16_t __temp;
 
 //****************************** Functions prototype ***************************
 void initTruckVariables(void);
+
+
+////////////////////////////////////////////////////////////////////////////////
+//union __attribute__ ((far))  {
+//    unsigned long long CANBUTTONPRMS;
+//   struct 
+//    {
+//		unsigned char can_number:2;
+//        unsigned char :2;
+//        unsigned char filt_number:4;
+//        unsigned char bit_mask:8;        
+//        unsigned char value1:8;
+//        unsigned char value2:8;
+//        unsigned long id:29;
+//        unsigned char byte:3;        
+//    };
+//} CANBUTTONPRMSbits;
+
+//char get_nibble_from_str ( char *nibble_ptr ) {
+//
+//    if ((*nibble_ptr >= 0x30)&&(*nibble_ptr <= 0x39)) {   return (*nibble_ptr - 0x30); } 
+//    else {
+//        if ((*nibble_ptr == 'A') || (*nibble_ptr == 'a')) return 10;
+//        if ((*nibble_ptr == 'B') || (*nibble_ptr == 'b')) return 11;
+//        if ((*nibble_ptr == 'C') || (*nibble_ptr == 'c')) return 12;
+//        if ((*nibble_ptr == 'D') || (*nibble_ptr == 'd')) return 13;
+//        if ((*nibble_ptr == 'E') || (*nibble_ptr == 'e')) return 14;
+//        if ((*nibble_ptr == 'F') || (*nibble_ptr == 'f')) return 15;
+//    }
+//    
+//return -1;
+//    
+//}
 
 #endif	/* VARIABLES_H */
 
