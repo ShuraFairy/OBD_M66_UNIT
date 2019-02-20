@@ -27712,7 +27712,7 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
             redirect_can_to_uart ( (unsigned long)ID_tmp );
 //        }
     }
-
+////////////////////////////////////////////////////////////////////////////////
 // Fuel Level - Уровень топлива
     if (FUELLEVELbits.can_number != 0) { 
         if (FUELLEVELbits.can_number == 1 && FUELLEVELbits.id == ID_tmp) {
@@ -27733,13 +27733,13 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
     if (TOTALFUELUSEDCONFbits.can_number != 0) { 
         if (TOTALFUELUSEDCONFbits.can_number == 1 && TOTALFUELUSEDCONFbits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
-            if ((CAN1_DATA_buf[0] == 0x00) && (CAN1_DATA_buf[1] == 0x00) && (CAN1_DATA_buf[2] == 0x00) && // ???
-                    (CAN1_DATA_buf[3] == 0x00)) {
+            //if ((CAN1_DATA_buf[0] == 0x00) && (CAN1_DATA_buf[1] == 0x00) && (CAN1_DATA_buf[2] == 0x00) && // ???
+            //        (CAN1_DATA_buf[3] == 0x00)) {
                 TOTALFUELUSEDbits.value1 = CAN1_DATA_buf[4];
                 TOTALFUELUSEDbits.value2 = CAN1_DATA_buf[5];
                 TOTALFUELUSEDbits.value3 = CAN1_DATA_buf[6];
                 TOTALFUELUSEDbits.value4 = CAN1_DATA_buf[7];
-            }  
+            //}  
             
         }
         if (TOTALFUELUSEDCONFbits.can_number == 2 && TOTALFUELUSEDCONFbits.id == ID2_tmp) {
@@ -27750,15 +27750,15 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
 
 // High Resolution Total Vehicle Distance - Общий пробег
     if (TOTALVEHICLEDISTANCECONFbits.can_number != 0) { 
-        if (TOTALVEHICLEDISTANCECONFbits.can_number == 1 && TOTALFUELUSEDCONFbits.id == ID_tmp) {
+        if (TOTALVEHICLEDISTANCECONFbits.can_number == 1 && TOTALVEHICLEDISTANCECONFbits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
-            if ((CAN1_DATA_buf[4] == 0x80) && (CAN1_DATA_buf[5] == 0x31) && (CAN1_DATA_buf[6] == 0x03) && // ????
-                    (CAN1_DATA_buf[7] == 0x00)) {
+            //if ((CAN1_DATA_buf[4] == 0x80) && (CAN1_DATA_buf[5] == 0x31) && (CAN1_DATA_buf[6] == 0x03) && // ????
+            //        (CAN1_DATA_buf[7] == 0x00)) {
                 TOTALVEHICLEDISTANCEbits.value1 = CAN1_DATA_buf[0];
                 TOTALVEHICLEDISTANCEbits.value2 = CAN1_DATA_buf[1];
                 TOTALVEHICLEDISTANCEbits.value3 = CAN1_DATA_buf[2];
                 TOTALVEHICLEDISTANCEbits.value4 = CAN1_DATA_buf[3];
-            }  
+            //}  
             
         }
         if (TOTALVEHICLEDISTANCECONFbits.can_number == 2 && TOTALVEHICLEDISTANCECONFbits.id == ID2_tmp) {
@@ -27771,13 +27771,13 @@ static unsigned char lights_status = 0, lights_status_tmp = 0;
     if (ENGINETOTALHOURSCONFbits.can_number != 0) { 
         if (ENGINETOTALHOURSCONFbits.can_number == 1 && ENGINETOTALHOURSCONFbits.id == ID_tmp) {
             generate_canbus_sleep_message ( 1 );
-            if ((CAN1_DATA_buf[4] == 0x02) && (CAN1_DATA_buf[5] == 0x0C) && (CAN1_DATA_buf[6] == 0x00) && // ????
-                    (CAN1_DATA_buf[7] == 0x00)) {
+            //if ((CAN1_DATA_buf[4] == 0x02) && (CAN1_DATA_buf[5] == 0x0C) && (CAN1_DATA_buf[6] == 0x00) && // ????
+            //        (CAN1_DATA_buf[7] == 0x00)) {
                 ENGINETOTALHOURSbits.value1 = CAN1_DATA_buf[0];
                 ENGINETOTALHOURSbits.value2 = CAN1_DATA_buf[1];
                 ENGINETOTALHOURSbits.value3 = CAN1_DATA_buf[2];
                 ENGINETOTALHOURSbits.value4 = CAN1_DATA_buf[3];
-            }  
+            //}  
             
         }
         if (ENGINETOTALHOURSCONFbits.can_number == 2 && ENGINETOTALHOURSCONFbits.id == ID2_tmp) {
@@ -27980,8 +27980,7 @@ int temp1;
 
 // ID    
     id = 0; temp = 0;
-    temp = get_nibble_from_str ( ptr + 12 );
-    if (temp == -1) return 0;
+    temp = get_nibble_from_str ( ptr + 12 );   if (temp == -1) return 0;
     id = temp;
     temp = get_nibble_from_str ( ptr + 13 );
     if (temp == -1) return 0;
@@ -28825,9 +28824,9 @@ int temp1;
 // !!! Просто проверка
     if (param == 0x20) {
         Nop();Nop();Nop();
-        CANTESTPRMSbits.can_number = number_of_can;
-        CANTESTPRMSbits.filt_number = number_of_filter;
-        CANTESTPRMSbits.id = id;
+        CANTESTPRMSbits.can_number = number_of_can;         // 2
+        CANTESTPRMSbits.filt_number = number_of_filter;     // 4
+        CANTESTPRMSbits.id = id;                            
         CANTESTPRMSbits.byte = 0;
         temp = get_nibble_from_str ( ptr + 21 ); if (temp == -1) return 0;
         CANTESTPRMSbits.byte = temp;
@@ -28859,8 +28858,46 @@ int temp1;
         
         // !!! Address ???
 //      FM25_write_8( 964/*956*/, (unsigned long long) CANTESTPRMSbits.CANTESTPRMS );
-    }   
+    }  
+////////////////////////////////////////////////////////////////////////////////        
+    // Fuel Level - Уровень топлива
+    if (param == 0x21) {
+        Nop();Nop();Nop();
+        FUELLEVELbits.can_number = number_of_can;
+        FUELLEVELbits.filt_number = number_of_filter;
+        FUELLEVELbits.id = id;
+        //FUELLEVELbits.byte = 0;
+        temp = get_nibble_from_str ( ptr + 21 ); if (temp == -1) return 0;
+        //FUELLEVELbits.byte = temp;
+        //FUELLEVELbits.bit_mask = 0;
+        temp = get_nibble_from_str ( ptr + 23 ); if (temp == -1) return 0;
+        //FUELLEVELbits.bit_mask = temp;
+        temp = get_nibble_from_str ( ptr + 24 ); if (temp == -1) return 0;
+        //FUELLEVELbits.bit_mask = (FUELLEVELbits.bit_mask << 4) + temp;
+
+        //FUELLEVELbits.value1 = 0;
+        temp = get_nibble_from_str ( ptr + 26 ); if (temp == -1) return 0; 
+        //FUELLEVELbits.value1 = temp;
+        temp = get_nibble_from_str ( ptr + 27 ); if (temp == -1) return 0;
+        //FUELLEVELbits.value1 = (FUELLEVELbits.value1 << 4) + temp; 
+        //FUELLEVELbits.value2 = 0;
+        temp = get_nibble_from_str ( ptr + 29 ); if (temp == -1) return 0; 
+        //FUELLEVELbits.value2 = temp;
+        temp = get_nibble_from_str ( ptr + 30 ); if (temp == -1) return 0;
+        //UELLEVELbits.value2 = (FUELLEVELbits.value2 << 4) + temp; 
         
+        if (number_of_can == 1) {
+            exide = CAN1SETTINGSbits.ide;
+        } else 
+            exide = CAN2SETTINGSbits.ide;
+        if (number_of_can == 1) 
+            ecan1WriteRxAcptFilter( (int)number_of_filter,(long)FUELLEVELbits.id, (unsigned int)exide, 15, 0);
+        if (number_of_can == 2) 
+            ecan2WriteRxAcptFilter( (int)number_of_filter,(long)FUELLEVELbits.id, (unsigned int)exide, 15, 0);
+        
+        // !!! Address ???
+//      FM25_write_8( 964/*956*/, (unsigned long long) CANTESTPRMSbits.CANTESTPRMS );
+    }     
 Nop();Nop();Nop(); 
 return 1;
 }
@@ -29011,32 +29048,32 @@ void init_CAN_filters (void) {
 	while(C1CTRL1bits.OPMODE!=4);
     
     if (CANIGNPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANIGNPRMSbits.filt_number,   (long)CANIGNPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (CANDDPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANDDPRMSbits.filt_number,    (long)CANDDPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (CANFPDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANFPDPRMSbits.filt_number,   (long)CANFPDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANRLDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANRLDPRMSbits.filt_number,   (long)CANRLDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANRRDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANRRDPRMSbits.filt_number,   (long)CANRRDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBNPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANBNPRMSbits.filt_number,    (long)CANBNPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBTPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANBTPRMSbits.filt_number,    (long)CANBTPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANODOPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANODOPRMSbits.filt_number,   (long)CANODOPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANFLPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANFLPRMSbits.filt_number,    (long)CANFLPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBELTPRMSbits.can_number == 1)  ecan1WriteRxAcptFilter( (int)CANBELTPRMSbits.filt_number,  (long)CANBELTPRMSbits.id,   (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (LOCKSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)LOCKSTATPRMSbits.filt_number, (long)LOCKSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (LOCKSTATPRMS2bits.can_number == 1)ecan1WriteRxAcptFilter( (int)LOCKSTATPRMS2bits.filt_number,(long)LOCKSTATPRMS2bits.id, (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANIGNPRMS2bits.can_number == 1)  ecan1WriteRxAcptFilter( (int)CANIGNPRMS2bits.filt_number,  (long)CANIGNPRMS2bits.id,   (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //Чтобы работал exid вместо 3 должно быть 0
-    if (WEBASTOSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)WEBASTOSTATPRMSbits.filt_number, (long)WEBASTOSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (ALARMSTATPRMS2bits.can_number == 1) ecan1WriteRxAcptFilter( (int)ALARMSTATPRMS2bits.filt_number, (long)ALARMSTATPRMS2bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (GEARBOXSTATPRMS2bits.can_number == 1) ecan1WriteRxAcptFilter( (int)GEARBOXSTATPRMS2bits.filt_number, (long)GEARBOXSTATPRMS2bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (LOCKSTATPRMS3bits.can_number == 1) ecan1WriteRxAcptFilter( (int)LOCKSTATPRMS3bits.filt_number, (long)LOCKSTATPRMS3bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (BOOTLOCKSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)BOOTLOCKSTATPRMSbits.filt_number, (long)BOOTLOCKSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //замок багажника тип 1        
-    if (CANLOCKBYTESPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANLOCKBYTESPRMSbits.filt_number, (long)CANLOCKBYTESPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANLIGHTSPRMSbits.filt_number, (long)CANLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANTLLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTLLIGHTSPRMSbits.filt_number, (long)CANTLLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANTRLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTRLIGHTSPRMSbits.filt_number, (long)CANTRLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANFLCNPNPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANFLCNPNPRMSbits.filt_number, (long)CANFLCNPNPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANFL2PRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANFL2PRMSbits.filt_number, (long)CANFL2PRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANBRPPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANBRPPRMSbits.filt_number, (long)CANBRPPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (RPMPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)RPMPRMSbits.filt_number, (long)RPMPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (TOYOTAKEYDATbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANDDPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANDDPRMSbits.filt_number,    (long)CANDDPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (CANFPDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANFPDPRMSbits.filt_number,   (long)CANFPDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANRLDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANRLDPRMSbits.filt_number,   (long)CANRLDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANRRDPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANRRDPRMSbits.filt_number,   (long)CANRRDPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBNPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANBNPRMSbits.filt_number,    (long)CANBNPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBTPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANBTPRMSbits.filt_number,    (long)CANBTPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANODOPRMSbits.can_number == 1)   ecan1WriteRxAcptFilter( (int)CANODOPRMSbits.filt_number,   (long)CANODOPRMSbits.id,    (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANFLPRMSbits.can_number == 1)    ecan1WriteRxAcptFilter( (int)CANFLPRMSbits.filt_number,    (long)CANFLPRMSbits.id,     (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBELTPRMSbits.can_number == 1)  ecan1WriteRxAcptFilter( (int)CANBELTPRMSbits.filt_number,  (long)CANBELTPRMSbits.id,   (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (LOCKSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)LOCKSTATPRMSbits.filt_number, (long)LOCKSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (LOCKSTATPRMS2bits.can_number == 1)ecan1WriteRxAcptFilter( (int)LOCKSTATPRMS2bits.filt_number,(long)LOCKSTATPRMS2bits.id, (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANIGNPRMS2bits.can_number == 1)  ecan1WriteRxAcptFilter( (int)CANIGNPRMS2bits.filt_number,  (long)CANIGNPRMS2bits.id,   (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //Чтобы работал exid вместо 3 должно быть 0
+//    if (WEBASTOSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)WEBASTOSTATPRMSbits.filt_number, (long)WEBASTOSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (ALARMSTATPRMS2bits.can_number == 1) ecan1WriteRxAcptFilter( (int)ALARMSTATPRMS2bits.filt_number, (long)ALARMSTATPRMS2bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (GEARBOXSTATPRMS2bits.can_number == 1) ecan1WriteRxAcptFilter( (int)GEARBOXSTATPRMS2bits.filt_number, (long)GEARBOXSTATPRMS2bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (LOCKSTATPRMS3bits.can_number == 1) ecan1WriteRxAcptFilter( (int)LOCKSTATPRMS3bits.filt_number, (long)LOCKSTATPRMS3bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (BOOTLOCKSTATPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)BOOTLOCKSTATPRMSbits.filt_number, (long)BOOTLOCKSTATPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //замок багажника тип 1        
+//    if (CANLOCKBYTESPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANLOCKBYTESPRMSbits.filt_number, (long)CANLOCKBYTESPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANLIGHTSPRMSbits.filt_number, (long)CANLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANTLLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTLLIGHTSPRMSbits.filt_number, (long)CANTLLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANTRLIGHTSPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTRLIGHTSPRMSbits.filt_number, (long)CANTRLIGHTSPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANFLCNPNPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANFLCNPNPRMSbits.filt_number, (long)CANFLCNPNPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANFL2PRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANFL2PRMSbits.filt_number, (long)CANFL2PRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANBRPPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANBRPPRMSbits.filt_number, (long)CANBRPPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (RPMPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)RPMPRMSbits.filt_number, (long)RPMPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (TOYOTAKEYDATbits.can_number == 1) ecan1WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 1) ecan1WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
     //if (DIAGNOSTICSConfig.Bits.can_number == 1) ecan1WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN1SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
@@ -29058,6 +29095,7 @@ void init_CAN_filters (void) {
 //    ecan1WriteRxAcptFilter( 13,(long)0x7E8, (unsigned int)CAN1SETTINGSbits.ide, 5, 3); //OBD 
 //    ecan1WriteRxAcptFilter( 14,(long)0x7E9, (unsigned int)CAN1SETTINGSbits.ide, 6, 3); //OBD 
 //    ecan1WriteRxAcptFilter( 15,(long)0x7EA, (unsigned int)CAN1SETTINGSbits.ide, 7, 3); //OBD 
+    
     if (CAN1SETTINGSbits.ide == 0) {
         ecan1WriteRxAcptFilter( 15,(long)0x7EA, (unsigned int)CAN1SETTINGSbits.ide, 15, 0); //OBD     
         ecan1WriteRxAcptMask  ( 0, 0x1FFFFFF0, 1, 0 );
@@ -29076,32 +29114,32 @@ void init_CAN_filters (void) {
 	while(C2CTRL1bits.OPMODE!=4);    
     
     if (CANIGNPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANIGNPRMSbits.filt_number,   (long)CANIGNPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (CANDDPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANDDPRMSbits.filt_number,    (long)CANDDPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (CANFPDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANFPDPRMSbits.filt_number,   (long)CANFPDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANRLDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANRLDPRMSbits.filt_number,   (long)CANRLDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANRRDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANRRDPRMSbits.filt_number,   (long)CANRRDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBNPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANBNPRMSbits.filt_number,    (long)CANBNPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBTPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANBTPRMSbits.filt_number,    (long)CANBTPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANODOPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANODOPRMSbits.filt_number,   (long)CANODOPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANFLPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANFLPRMSbits.filt_number,    (long)CANFLPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANBELTPRMSbits.can_number == 2)   ecan2WriteRxAcptFilter( (int)CANBELTPRMSbits.filt_number,  (long)CANBELTPRMSbits.id,   (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (LOCKSTATPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)LOCKSTATPRMSbits.filt_number, (long)LOCKSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (LOCKSTATPRMS2bits.can_number == 2) ecan2WriteRxAcptFilter( (int)LOCKSTATPRMS2bits.filt_number,(long)LOCKSTATPRMS2bits.id, (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (CANIGNPRMS2bits.can_number == 2)   ecan2WriteRxAcptFilter( (int)CANIGNPRMS2bits.filt_number,  (long)CANIGNPRMS2bits.id,   (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,
-    if (WEBASTOSTATPRMSbits.can_number == 2) ecan2WriteRxAcptFilter( (int)WEBASTOSTATPRMSbits.filt_number, (long)WEBASTOSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (ALARMSTATPRMS2bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)ALARMSTATPRMS2bits.filt_number, (long)ALARMSTATPRMS2bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (GEARBOXSTATPRMS2bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)GEARBOXSTATPRMS2bits.filt_number, (long)GEARBOXSTATPRMS2bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (LOCKSTATPRMS3bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)LOCKSTATPRMS3bits.filt_number, (long)LOCKSTATPRMS3bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
-    if (BOOTLOCKSTATPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)BOOTLOCKSTATPRMSbits.filt_number, (long)BOOTLOCKSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //замок багажника тип 1
-    if (CANLOCKBYTESPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANLOCKBYTESPRMSbits.filt_number, (long)CANLOCKBYTESPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANLIGHTSPRMSbits.filt_number, (long)CANLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANTLLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTLLIGHTSPRMSbits.filt_number, (long)CANTLLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANTRLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTRLIGHTSPRMSbits.filt_number, (long)CANTRLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANFLCNPNPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANFLCNPNPRMSbits.filt_number, (long)CANFLCNPNPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANFL2PRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANFL2PRMSbits.filt_number, (long)CANFL2PRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (CANBRPPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANBRPPRMSbits.filt_number, (long)CANBRPPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (RPMPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)RPMPRMSbits.filt_number, (long)RPMPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
-    if (TOYOTAKEYDATbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANDDPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANDDPRMSbits.filt_number,    (long)CANDDPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (CANFPDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANFPDPRMSbits.filt_number,   (long)CANFPDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANRLDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANRLDPRMSbits.filt_number,   (long)CANRLDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANRRDPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANRRDPRMSbits.filt_number,   (long)CANRRDPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBNPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANBNPRMSbits.filt_number,    (long)CANBNPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBTPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANBTPRMSbits.filt_number,    (long)CANBTPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANODOPRMSbits.can_number == 2)    ecan2WriteRxAcptFilter( (int)CANODOPRMSbits.filt_number,   (long)CANODOPRMSbits.id,    (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANFLPRMSbits.can_number == 2)     ecan2WriteRxAcptFilter( (int)CANFLPRMSbits.filt_number,    (long)CANFLPRMSbits.id,     (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANBELTPRMSbits.can_number == 2)   ecan2WriteRxAcptFilter( (int)CANBELTPRMSbits.filt_number,  (long)CANBELTPRMSbits.id,   (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (LOCKSTATPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)LOCKSTATPRMSbits.filt_number, (long)LOCKSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (LOCKSTATPRMS2bits.can_number == 2) ecan2WriteRxAcptFilter( (int)LOCKSTATPRMS2bits.filt_number,(long)LOCKSTATPRMS2bits.id, (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (CANIGNPRMS2bits.can_number == 2)   ecan2WriteRxAcptFilter( (int)CANIGNPRMS2bits.filt_number,  (long)CANIGNPRMS2bits.id,   (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,
+//    if (WEBASTOSTATPRMSbits.can_number == 2) ecan2WriteRxAcptFilter( (int)WEBASTOSTATPRMSbits.filt_number, (long)WEBASTOSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (ALARMSTATPRMS2bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)ALARMSTATPRMS2bits.filt_number, (long)ALARMSTATPRMS2bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (GEARBOXSTATPRMS2bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)GEARBOXSTATPRMS2bits.filt_number, (long)GEARBOXSTATPRMS2bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (LOCKSTATPRMS3bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)LOCKSTATPRMS3bits.filt_number, (long)LOCKSTATPRMS3bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //8 зажигание,    
+//    if (BOOTLOCKSTATPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)BOOTLOCKSTATPRMSbits.filt_number, (long)BOOTLOCKSTATPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); //замок багажника тип 1
+//    if (CANLOCKBYTESPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANLOCKBYTESPRMSbits.filt_number, (long)CANLOCKBYTESPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANLIGHTSPRMSbits.filt_number, (long)CANLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANTLLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTLLIGHTSPRMSbits.filt_number, (long)CANTLLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANTRLIGHTSPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTRLIGHTSPRMSbits.filt_number, (long)CANTRLIGHTSPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANFLCNPNPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANFLCNPNPRMSbits.filt_number, (long)CANFLCNPNPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANFL2PRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANFL2PRMSbits.filt_number, (long)CANFL2PRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (CANBRPPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANBRPPRMSbits.filt_number, (long)CANBRPPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (RPMPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)RPMPRMSbits.filt_number, (long)RPMPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
+//    if (TOYOTAKEYDATbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)TOYOTAKEYDATbits.filt_number, (long)TOYOTAKEYDATbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANBUTTONPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANBUTTONPRMSbits.filt_number, (long)CANBUTTONPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для управления замками дверей
     if (CANTESTPRMSbits.can_number == 2)  ecan2WriteRxAcptFilter( (int)CANTESTPRMSbits.filt_number, (long)CANTESTPRMSbits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Тестирования
     //if (DIAGNOSTICSConfig.Bits.can_number == 2)  ecan2WriteRxAcptFilter( (int)DIAGNOSTICSConfig.Bits.filt_number, (long)DIAGNOSTICSConfig.Bits.id,  (unsigned int)CAN2SETTINGSbits.ide, 15, 0); // байты команд ключа для Диагностики
@@ -41008,12 +41046,12 @@ void responseERADiagnostic(uint16_t * data1, uint16_t * data2, uint16_t * data3,
 void initTruckVariables(void)
 {    
     FUELLEVELbits.can_number                    = 0x1;
-    FUELLEVELbits.filt_number                   = 0x4;
+    FUELLEVELbits.filt_number                   = 0x6;
     FUELLEVELbits.value                         = 0x0;
     FUELLEVELbits.id                            = 0x18FEFC21;    
     
     TOTALFUELUSEDCONFbits.can_number            = 0x1;
-    TOTALFUELUSEDCONFbits.filt_number           = 0x5;
+    TOTALFUELUSEDCONFbits.filt_number           = 0x7;
     TOTALFUELUSEDCONFbits.id                    = 0x18FEE927;
     TOTALFUELUSEDbits.value1                    = 0x0;
     TOTALFUELUSEDbits.value2                    = 0x0;
@@ -41021,7 +41059,7 @@ void initTruckVariables(void)
     TOTALFUELUSEDbits.value4                    = 0x0; 
     
     TOTALVEHICLEDISTANCECONFbits.can_number     = 0x1;
-    TOTALVEHICLEDISTANCECONFbits.filt_number    = 0x6;
+    TOTALVEHICLEDISTANCECONFbits.filt_number    = 0x8;
     TOTALVEHICLEDISTANCECONFbits.id             = 0x18FEC1EE;
     TOTALVEHICLEDISTANCEbits.value1             = 0x0;
     TOTALVEHICLEDISTANCEbits.value2             = 0x0;
@@ -41029,7 +41067,7 @@ void initTruckVariables(void)
     TOTALVEHICLEDISTANCEbits.value4             = 0x0;
  
     ENGINETOTALHOURSCONFbits.can_number         = 0x1;
-    ENGINETOTALHOURSCONFbits.filt_number        = 0x7;
+    ENGINETOTALHOURSCONFbits.filt_number        = 0x9;
     ENGINETOTALHOURSCONFbits.id                 = 0x18FEE527;
     ENGINETOTALHOURSbits.value1                 = 0x0;
     ENGINETOTALHOURSbits.value2                 = 0x0;
@@ -41037,12 +41075,12 @@ void initTruckVariables(void)
     ENGINETOTALHOURSbits.value4                 = 0x0;
 
     EGINECOOLANTTEMPERATUREbits.can_number      = 0x1;
-    EGINECOOLANTTEMPERATUREbits.filt_number     = 0x8;
+    EGINECOOLANTTEMPERATUREbits.filt_number     = 0xA;
     EGINECOOLANTTEMPERATUREbits.id              = 0x18FEEE00;
     EGINECOOLANTTEMPERATUREbits.value           = 0x0;
     
     SERVICEDISTANCEbits.can_number              = 0x1;
-    SERVICEDISTANCEbits.filt_number             = 0x9;
+    SERVICEDISTANCEbits.filt_number             = 0xB;
     SERVICEDISTANCEbits.id                      = 0x18FEC027;
     SERVICEDISTANCEbits.value1                  = 0x0;
     SERVICEDISTANCEbits.value2                  = 0x0;
